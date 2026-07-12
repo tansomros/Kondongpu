@@ -1,0 +1,12 @@
+services:
+  hosxp-worker-service:
+    image: hosxp-worker-service
+    build:
+      context: .
+      dockerfile: src/HosxpWorkerService/Dockerfile
+
+  suth-checkup-api:
+    image: suth-checkup-api
+    build:
+      context: .
+      dockerfile: src/API/Dockerfile
