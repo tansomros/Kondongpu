@@ -37,3 +37,29 @@ export const useApi = createFetch({
     },
   },
 })
+
+export const useHosxpApi = createFetch({
+  baseUrl: import.meta.env.VITE_HOSXP_API_BASE_URL,
+  fetchOptions: {
+    headers: {
+      Accept: 'application/json',
+    },
+  },
+  options: {
+    refetch: true,
+    afterFetch(ctx) {
+      const { data, response } = ctx
+
+      // Parse data if it's JSON
+      let parsedData = null
+      try {
+        parsedData = destr(data)
+      }
+      catch (error) {
+        console.error(error)
+      }
+      
+      return { data: parsedData, response }
+    },
+  },
+})

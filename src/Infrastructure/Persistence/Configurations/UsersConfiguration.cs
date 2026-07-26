@@ -11,7 +11,7 @@ public class UsersConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Username).HasMaxLength(50);
-        builder.Property(x => x.Passwords).HasMaxLength(200);
+        builder.Property(x => x.PasswordHash).HasMaxLength(200);
         builder.Property(x => x.DisplayName).HasMaxLength(100);
         builder.Property(x => x.PositionName).HasMaxLength(100);
     }

@@ -163,49 +163,6 @@
   "25": "25",
   "50": "50",
   "100": "100",
-  "lookups": {
-    "examResult": {
-      "Normal": "Normal",
-      "Abnormal": "Abnormal",
-      "ไม่ได้ตรวจ": "Not Examined"
-    },
-    "labResult": {
-      "Normal": "Within Normal Limits",
-      "Abnormal": "Abnormal"
-    },
-    "xrayResult": {
-      "Normal": "No Abnormality Detected",
-      "Abnormal": "Abnormality Detected",
-      "W": "Referred to Specialist"
-    },
-    "bmdResult": {
-      "Normal": "Normal Bone Density",
-      "C1": "Osteopenia (Low Bone Mass)",
-      "C2": "Osteoporosis"
-    },
-    "abiResult": {
-      "Normal": "Within Normal Limits",
-      "C1": "Arteriosclerosis Detected",
-      "C2": "Arterial Occlusion Detected"
-    },
-    "checkupStatus": {
-      "1": "Pending",
-      "2": "In Progress",
-      "3": "Reported"
-    },
-    "eyeResult": {
-      "ปกติ": "Normal",
-      "สายตายาว": "Farsighted",
-      "สายตาสั้น": "Nearsighted"
-    },
-    "hearingLossLevel": {
-      "ปกติ": "Normal",
-      "เสียเล็กน้อย": "Mild Hearing Loss",
-      "เสียปานกลาง": "Moderate Hearing Loss",
-      "เสียมาก": "Severe Hearing Loss",
-      "เสียรุนแรง": "Profound Hearing Loss"
-    }
-  },
   "$vuetify": {
     "badge": "Badge",
     "noDataText": "No data available",

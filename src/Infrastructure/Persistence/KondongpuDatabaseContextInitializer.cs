@@ -46,6 +46,8 @@ namespace Kondongpu.Infrastructure.Persistence
                 await mediator.Send(new PrefixDataInitializerCommand());
                 await mediator.Send(new RoleDataInitializerCommand());
                 await mediator.Send(new RunningConfigDataInitializerCommand());
+                await mediator.Send(new RunningDataInitializerCommand());
+                await mediator.Send(new UserDataInitializerCommand());
             }
             catch (Exception ex)
             {

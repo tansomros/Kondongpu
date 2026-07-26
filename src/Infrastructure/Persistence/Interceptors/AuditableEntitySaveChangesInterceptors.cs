@@ -16,7 +16,7 @@ namespace Kondongpu.Infrastructure.Persistence.Interceptors
 
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
-            UpdateEntities(eventData.Context);
+            UpdateEntities(eventData.Context!);
             return base.SavingChanges(eventData, result);
         }
 
@@ -25,7 +25,7 @@ namespace Kondongpu.Infrastructure.Persistence.Interceptors
             InterceptionResult<int> result,
             CancellationToken cancellationToken = default)
         {
-            UpdateEntities(eventData.Context);
+            UpdateEntities(eventData.Context!);
             return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 

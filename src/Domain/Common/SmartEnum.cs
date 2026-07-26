@@ -34,15 +34,15 @@ public abstract class SmartEnum<T> where T : SmartEnum<T>
     });
 
     public string Value { get; }
-    public string AbnormalFlag { get; }
-    public string DisplayName { get; }
+    public string Code { get; }
+    public string Name { get; }
     public int Sort { get; }
 
-    protected SmartEnum(string value,string abnormalFlag, string displayName, int sort)
+    protected SmartEnum(string value,string code, string name, int sort)
     {
         Value = value;
-        AbnormalFlag=abnormalFlag;
-        DisplayName = displayName;
+        Code=code;
+        Name = name;
         Sort = sort;
     }
 
@@ -61,25 +61,25 @@ public abstract class SmartEnum<T> where T : SmartEnum<T>
 
     /// <summary>
     /// Returns the display name localized to the given culture code.
-    /// Falls back to the default DisplayName when cultureCode is null or the resource is not found.
+    /// Falls back to the default Name when cultureCode is null or the resource is not found.
     /// </summary>
     public string GetDisplayName(string? cultureCode = null)
     {
         if (string.IsNullOrEmpty(cultureCode))
-            return DisplayName;
+            return Name;
 
         var rm = _resourceManager.Value;
         if (rm is null)
-            return DisplayName;
+            return Name;
 
         try
         {
             var culture = CultureInfo.GetCultureInfo(cultureCode);
-            return rm.GetString(Value, culture) ?? DisplayName;
+            return rm.GetString(Value, culture) ?? Name;
         }
         catch (CultureNotFoundException)
         {
-            return DisplayName;
+            return Name;
         }
     }
 

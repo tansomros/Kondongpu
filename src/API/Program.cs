@@ -1,22 +1,24 @@
 using System.Globalization;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Kondongpu.Application;
+using Kondongpu.Application.Common.Interfaces;
+using Kondongpu.Application.Common.Security;
+using Kondongpu.Infrastructure;
+using Kondongpu.Infrastructure.Identity;
+using Kondongpu.Infrastructure.Persistence;
+using Kondongpu.Presentation.API.Converters;
 using Kondongpu.Presentation.API.Middlewares;
+using Kondongpu.Presentation.API.Routing;
 using Kondongpu.Presentation.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Kondongpu.Application;
-using Kondongpu.Application.Common.Interfaces;
-using Kondongpu.Application.Common.Security;
-
-using Kondongpu.Infrastructure;
-using Kondongpu.Infrastructure.Persistence;
-using Kondongpu.Presentation.API.Converters;
-using Kondongpu.Presentation.API.Routing;
 
 namespace Kondongpu.Presentation.API;
 public class Program
@@ -77,7 +79,34 @@ public class Program
         {
             Console.WriteLine("Warning: Please config identity authority in appsetting.Environment.json. Skipping Identity configuration.");
         }
+        //----------------Identity JWt-------------------
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var jwt = builder.Configuration
+            .GetSection(JwtSettings.SectionName)
+            .Get<JwtSettings>()!;
 
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwt.Issuer,
+                ValidAudience = jwt.Audience,
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwt.SecretKey))
+            };
+    });
+
+        builder.Services.AddAuthorization();
+
+        //---------------------------------------
 
         builder.Services.AddMemoryCache();
         //builder.Services.AddScoped<ICheckupItemCacheService, CheckupItemCacheService>();

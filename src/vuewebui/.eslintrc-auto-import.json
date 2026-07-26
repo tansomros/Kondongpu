@@ -360,6 +360,13 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true
+    "whenever": true,
+    "$hosxpapi": true,
+    "formatCurrency": true,
+    "formatNumber": true,
+    "formatPercent": true,
+    "getAgeTextFromBirthDate": true,
+    "toBuddhistYear": true,
+    "useHosxpApi": true
   }
 }

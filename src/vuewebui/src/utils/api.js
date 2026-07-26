@@ -8,3 +8,6 @@ export const $api = ofetch.create({
       options.headers.append('Authorization', `Bearer ${accessToken}`)
   },
 })
+export const $hosxpapi = ofetch.create({
+  baseURL: import.meta.env.VITE_HOSXP_API_BASE_URL,
+})

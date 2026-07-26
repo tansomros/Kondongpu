@@ -25,7 +25,7 @@ namespace Kondongpu.Application.Common.Interfaces
         DbSet<Running> Runnings { get; }
         DbSet<RunningConfig> RunningConfigs { get; }
         DbSet<User> Users { get; }
-        DbSet<UserRole> UserRoles { get; }
+        DbSet<Role> Roles { get; }
         DbSet<ReportTemplate> ReportTemplates { get; }
         DbSet<ReportTemplateDetail> ReportTemplateDetails { get; }
         DbSet<ReportGroup> ReportGroups { get; }

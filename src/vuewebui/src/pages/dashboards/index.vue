@@ -1,10 +1,7 @@
 <template>
   <div>
-    <VCard
-      class="mb6"
-      title="SUTH Checkup"
-    >
-      <VCardText>Dashboard</VCardText>
+    <VCard class="mb6" title="Dasboards">
+      <VCardText>Dasboards</VCardText>
     </VCard>
   </div>
 </template>

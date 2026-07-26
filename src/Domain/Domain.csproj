@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Remove="Entities\PatientCompany.cs" />
+    <Compile Remove="Enums\Role.cs" />
   </ItemGroup>
 
   <ItemGroup>

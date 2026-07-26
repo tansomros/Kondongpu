@@ -22,20 +22,20 @@ public class RoleDataInitializerCommandHandler : IRequestHandler<RoleDataInitial
 
     private async Task SeedRoles(CancellationToken cancellationToken)
     {
-        if (await _context.UserRoles.AnyAsync(cancellationToken))
+        if (await _context.Roles.AnyAsync(cancellationToken))
         {
             return;
         }
 
-        var UserRole = new[]
+        var Role = new[]
         {
-            new UserRole(1,"ADMINISTRATOR"),
-            new UserRole(2,"OFFICER"),          
-            new UserRole(3,"MANAGER"),
-            new UserRole(4,"USER"),
+            new Role(1,"ADMINISTRATOR"),
+            new Role(2,"OFFICER"),          
+            new Role(3,"MANAGER"),
+            new Role(4,"USER"),
         };
 
-        await _context.UserRoles.AddRangeAsync(UserRole, cancellationToken);
+        await _context.Roles.AddRangeAsync(Role, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }     
 } 

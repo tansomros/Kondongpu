@@ -30,7 +30,7 @@ namespace Kondongpu.Infrastructure.Persistence
         public DbSet<Running> Runnings => Set<Running>();
         public DbSet<RunningConfig> RunningConfigs => Set<RunningConfig>();
         public DbSet<User> Users => Set<User>();
-        public DbSet<UserRole> UserRoles => Set<UserRole>();
+        public DbSet<Role> Roles => Set<Role>();
 
         #region Report Template
         public DbSet<ReportTemplate> ReportTemplates => Set<ReportTemplate>();

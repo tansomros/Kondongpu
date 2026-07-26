@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <RootNamespace>Kondongpu.Application</RootNamespace>
     <AssemblyName>Kondongpu.Application</AssemblyName>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +33,6 @@
     <Compile Remove="Features\RolesReportTemplate\**" />
     <Compile Remove="Features\SpecialTests\**" />
     <Compile Remove="Features\Visions\**" />
-    <Compile Remove="Features\Xrays\**" />
     <EmbeddedResource Remove="Features\Addresses\**" />
     <EmbeddedResource Remove="Features\Audiograms\**" />
     <EmbeddedResource Remove="Features\BodyCompositions\**" />
@@ -59,7 +59,6 @@
     <EmbeddedResource Remove="Features\RolesReportTemplate\**" />
     <EmbeddedResource Remove="Features\SpecialTests\**" />
     <EmbeddedResource Remove="Features\Visions\**" />
-    <EmbeddedResource Remove="Features\Xrays\**" />
     <None Remove="Features\Addresses\**" />
     <None Remove="Features\Audiograms\**" />
     <None Remove="Features\BodyCompositions\**" />
@@ -86,11 +85,11 @@
     <None Remove="Features\RolesReportTemplate\**" />
     <None Remove="Features\SpecialTests\**" />
     <None Remove="Features\Visions\**" />
-    <None Remove="Features\Xrays\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Extensions\EfHelper\AnnotationHelper.cs" />
+    <Compile Remove="Features\Users\Queries\Get\SearchUserQuery.cs" />
     <Compile Remove="Services\CheckupItemCacheService.cs" />
     <Compile Remove="Services\CheckupStatusService.cs" />
     <Compile Remove="Services\ICheckupItemCacheService.cs" />

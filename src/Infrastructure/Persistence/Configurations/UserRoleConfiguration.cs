@@ -4,9 +4,9 @@ using Kondongpu.Domain.Entities;
 
 namespace Kondongpu.Infrastructure.Persistence.Configurations;
 
-public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
+public class UserRoleConfiguration : IEntityTypeConfiguration<Role>
 {
-    public void Configure(EntityTypeBuilder<UserRole> builder)
+    public void Configure(EntityTypeBuilder<Role> builder)
     {
 
         builder.HasKey(x => x.Id);

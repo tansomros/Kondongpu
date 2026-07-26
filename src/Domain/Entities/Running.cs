@@ -10,9 +10,10 @@ public class Running
     public int YearCode { get; set; }
     public int LastRunning { get; set; }
 
-    public Running(string code, int yearCode)
+    public Running(string code, int yearCode,int lastRunning)
     {
         Code = code;
         YearCode = yearCode;
+        LastRunning = lastRunning;
     }
 }

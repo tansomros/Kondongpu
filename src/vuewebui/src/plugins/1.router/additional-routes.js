@@ -5,7 +5,7 @@ export const redirects = [
     path: '/',
     name: 'index',
     redirect: to => {
-      return { name: 'dashboards' }
+      return { name: 'login' }
     },
   },
 ]

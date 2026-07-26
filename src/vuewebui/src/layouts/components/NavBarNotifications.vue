@@ -1,8 +1,9 @@
 <script setup>
-import avatar3 from '@images/avatars/avatar-3.png'
-import avatar4 from '@images/avatars/avatar-4.png'
-import avatar5 from '@images/avatars/avatar-5.png'
-import paypal from '@images/cards/paypal-rounded.png'
+import avatar1 from '@images/avatars/avatar-1.png'
+const avatar3 = avatar1
+const avatar4 = avatar1
+const avatar5 = avatar1
+const paypal = avatar1
 
 const notifications = ref([
   {
