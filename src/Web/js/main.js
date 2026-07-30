@@ -19311,7 +19311,7 @@
                 n = i.n(e),
                 r = i(148),
                 o = i.n(r);
-            t(document).ready((function() { if (document.getElementById("map")) { n.a.accessToken = "pk.eyJ1IjoiZGFzaGJvYXJlZHBhY2siLCJhIjoiY2s5bWlhZHRqMDAxazNsbnlpbXhhdDcwMSJ9.YU6cxTiRujREOAIVO6iLmA";
+            t(document).ready((function() { if (document.getElementById("map")) { n.a.accessToken = "";
                     new n.a.Map({ container: "map", zoom: 9, center: [137.9150899566626, 36.25956997955441], style: "mapbox://styles/mapbox/satellite-v9" }) } if (document.getElementById("gmap-example")) new o.a({ el: "#gmap-example", lat: -12.043333, lng: -77.028333, width: "100%", height: "300px" }) })) }.call(this, i(1)) }, function(t, e, i) { "use strict";
     i.r(e),
         function(t) { i(180), i(497), i(498), i(499), i(500), i(501);
