@@ -1,123 +1,22 @@
-# BigLion
+# Kondongpu
 
-Practical Enterprise Framework
 built with
-
-ASP.NET Core
-Vue 3
-PostgreSQL
+ASP.NET Framework 4.5 ขึ้นไป 
+MS SQL Server
 
 ---
 
 ## Technology
 
-* .NET 9
-* Vue 3
-* PrimeVue
-* PostgreSQL
-* EF Core
-* Dapper
-* C#
-* Swagger
-* EntityFramework    
+* ASP.NET Framework 4.5 ขึ้นไป 
+* Vb.Net 
+* MS SQL Server
 * Visual Studio 2022
 
 ## ขั้นตอนการรันใน visual studio
 
     ใน solution มีหลาย Project เลือกที่ต้องการรัน
 
-## ขั้นตอนการ build solution บน Terminal
-
-    $ solution> dotnet build -tl
-
-## ขั้นตอนการรัน project ใน Terminal
-
-    $ project> dotnet run
-
-## ขั้นตอนการรัน project ที่เป็น aspnetcore และ auto reload ใน Terminal
-
-    $ project> dotnet watch run
-
-## เครื่องมือสร้างโค้ด Code Scaffolding
-
-### โค้ดสำหรับสร้าง Command
-    ```
-    $ src\Application\Features> dotnet new ca-usecase --name Create --feature-name Checkups --usecase-type command --return-type int
-    ```
-### โค้ดสำหรับสร้าง Query
-    ```
-    $ src\Application> dotnet new ca-usecase -n GetTodos -fn TodoLists -ut query -rt TodosVm
-    ```
-### หากเกิดปัญหาในการสร้าง code
-    If you encounter the error *"No templates or subcommands found matching: 'ca-usecase'."*, install the template and try again:
-
-    ```
-    $> dotnet new install Clean.Architecture.Solution.Template::9.0.10
-    ```
-
-
-## การ Migration Database (Code First) ออกแบบ Entity Class แล้วนำไปสร้างเป็น Database
-
-    1. ไปที่ Tools -> Nuget Package Manager -> Package Manager Console
-    2. ใน Tab Package Manager Console เลือก Default Project เป็น Infrastructure
-    3. เลือก Project ที่จะรันเป็น API 
-    4. RUN คำสั่งต่อไปนี้เพื่อสร้าง Migration Class
-
-    ```
-	    PM> Add-Migration InitialCreate -Context KondongpuDatabaseContext -o Persistence/Migrations
-    ```
-
-    5. RUN คำสั่งต่อไปนี้สำหรับนำ Migration Class ที่ได้เอาไป Migrate บนฐานข้อมูล
-
-    ```
-	    PM> Update-Database -Context KondongpuDatabaseContext
-    ```
-
-## ในกรณีที่ production แล้ว แต่มีการเปลี่ยนแปลง Domain Entity ต่างๆ ภายหลัง ให้ทำการ Add migration ใหม่โดยตั้งชื่อใหม่ (เปลี่ยนชื่อ InitialCreate เป็นชื่ออื่นตาม) และทำการ Run คำสั่ง Update-Database 
-
-## ในกรณีที่มีการเปลี่ยนแปลง Domain Entity ต่างๆ เพื่อให้ง่ายในการพัฒนา ให้ทำการ Drop Database และลบ Migration Class เดิมออกก่อนดังนี้
-
-    1. RUN คำสั่งต่อไปนี้เพื่อ drop database !!!โปรดระวังการใช้คำสั่งนี้เพราะมันจะ drop database ทิ้งทันทีกลับคืนไม่ได้, โปรดตวรจสอบ Connection string ว่าถูก Database ไหม?
- 
-    ```
-	    PM> Drop-Database -Context KondongpuDatabaseContext
-    ```
-
-    2. RUN คำสั่งต่อไปนี้เพื่อลบ Migration Class ออก
-
-    ```
-	    PM> Remove-Migration -Context KondongpuDatabaseContext
-    ```
-
-## การรันทดสอบ
-
-    ```
-    $ solution> dotnet test
-    ```
-
-
-## deploy API ก่อนแล้วค่อย build ตัว worker
-
-    ```
-    $ solution> bash deploy-api.sh
-    $ solution> bash deploy-worker.sh
-    ```
-
-## มาตรฐานการออกแบบ API (RESTful API Standards)
-
-เพื่อให้การทำงานของ API เป็นไปตามมาตรฐานสากลและรองรับการสร้างโค้ดอัตโนมัติ (เช่น NSwag) ได้อย่างสมบูรณ์แบบ โปรดปฏิบัติตามกฎดังนี้ในการสร้างหรือแก้ไข Controller:
-
-1. **Routing และ Naming**: ห้ามใส่คำกริยา (Verb) ลงใน Route URL ให้ใช้ HTTP Methods (`GET`, `POST`, `PUT`, `DELETE`) ในการระบุการกระทำแทน
-   - ❌ ผิด: `[HttpPost("CreateLab")]`, `[HttpGet("[action]")]`
-   - ✅ ถูก: `POST /api/Labs` (เพิ่มข้อมูลใหม่), `GET /api/Labs/visits/1234` (ค้นหาตาม Visit)
-2. **การตั้งชื่อ Sub-Resources**: กรณีที่เป็นคำสั่งจำเพาะ ให้ระบุเป็นพาร์ธย่อยในรูปแบบ Noun เช่น `[HttpGet("search")]` หรือ `[HttpPut("batch")]`
-3. **การรับ Parameters**:
-   - ควบคุมการรับ ID ผ่าน `{id}` ในเส้นทาง URL
-   - ข้อมูลการค้นหาทั้งหมด (`SearchTerm`, `StartDate`) ต้องถูกรวมไว้ใน Object และรับผ่าน `[FromQuery]`
-   - ข้อมูลการสร้าง/ปรับปรุง (`Create...Command`) ต้องบังคับรับผ่าน `[FromBody]`
-4. **Return Types & Swagger**: ใช้ `ActionResult<T>` ทุกครั้งแทนการคืนค่าเป็น `IActionResult` เปล่าๆ เพื่อให้ Swagger สามารถอ่านโครงสร้าง Class ตอน 200 OK ได้อัตโนมัติ
-   - ✅ ถูก: `public async Task<ActionResult<KondongpuViewModel>> GetKondongpu(int id)`
-   - ให้ระบุพฤติกรรม Error (`400`, `404`, `500`) ผ่าน `ProducesResponseType` เสมอ เพื่อให้ NSwag สร้าง ApiException ได้อย่างแม่นยำ
 
 ## มาตรฐานการร่วมพัฒนา (โปรดปฏิบัติตามอย่างเคร่งครัด)
 
@@ -160,15 +59,3 @@ PostgreSQL
     11. หากรวมแล้วเป็นอันเสร็จสิ้น
     12. pull version ใหม่ลงมา แล้วแตก branch ใหม่เพื่อพัฒนาต่อจากนั้น
     13. ทำตามขั้นตอนแรกวนไป
-
-## Architecture Checklist ก่อน Merge ทุก Feature เช่น
-
- * [] Business Logic อยู่ใน Application หรือไม่
- * [] Repository ไม่มี Business Logic
- * [] Controller ไม่มี Logic
- * [] Validation อยู่ใน FluentValidation
- * [] DTO ไม่รั่วเข้า Domain
- * [] API Response เป็นมาตรฐาน
- * [] Logging ครบ
- * [] Unit Test (ถ้ามี Business Logic สำคัญ)
- * [] ตั้งชื่อตาม Coding Standard

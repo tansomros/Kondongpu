@@ -1,9 +1,6 @@
 0.1.0
 
-Initial Architecture
-
-ADR
-
-Coding Standard
-
-Database Convention
+- Initial Architecture
+- Coding Standard
+- หน้ารายการกำหนดราคา
+- ต่อไปทำหน้าแก้ไขราคา

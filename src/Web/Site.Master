@@ -1,0 +1,850 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.Master.vb" Inherits="Kondongpu.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%: Page.Title %> - ระบบบริหารเงินกู้ ฅนดงพุ</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Sarabun:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!---------------------------------New theme--------------->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/rajchasistyles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/pagestyles.css" />
+
+    <!---------- ----------------------------------->
+    <!-- Bootstrap 3.3.7  สำหรับ Modal  ไม่จำเป็นถ้ามีไฟล์ main 
+  <link rel="stylesheet" href="bower_components/bootstrap/assets/css/bootstrap.min.css" /> 
+  -->
+    <!--  
+  <link rel="stylesheet" href="../css/dscountdown.css" />     
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css" />
+  <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css" />  
+ -->
+    <link rel="stylesheet" href="assets/css/AdminLTE.min.css" />
+
+    <!-- Modal  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function openModals(sender, title, message) {
+            $("#spnTitle").text(title);
+            $("#spnMsg").text(message);
+            $('#modalPopUp').modal('show');
+            $('#modalConfirm').modal('show');
+            $('#modal-alert').modal('show');
+            $('#btnConfirm').attr('onclick', "$('#modalPopUp').modal('hide');setTimeout(function(){" + $(sender).prop('href') + "}, 50);");
+            return false;
+        }
+        function openModalWindow(sender, title, message, img1) {
+            $("#spnTitle2").text(title);
+            $("#spnMsg2").text(message);
+            document.getElementById('img1').src = img1;
+            $('#modal-window').modal('show');
+            return false;
+        }
+        function openModalWarningAlert(sender, title, message) {
+            $("#spnTitleW").text(title);
+            $("#spnMsgW").text(message);
+            $('#modal-warningalert').modal('show');
+            $('#btnConfirm').attr('onclick', "$('#modal-warningalert').modal('hide');setTimeout(function(){" + $(sender).prop('href') + "}, 50);");
+            return false;
+        }
+        function openModalWarningInfo(sender, title, message) {
+            $("#spnTitleInfo").text(title);
+            $("#spnMsgInfo").text(message);
+            $('#modal-warninginfo').modal('show');
+            $('#btnConfirm').attr('onclick', "$('#modal-warninginfo').modal('hide');setTimeout(function(){" + $(sender).prop('href') + "}, 50);");
+            return false;
+        }
+        function openModalSuccess(sender, title, message) {
+            $("#spnTitleS").text(title);
+            $("#spnMsgS").text(message);
+            $('#modal-success').modal('show');
+            $('#btnConfirm').attr('onclick', "$('#modal-success').modal('hide');setTimeout(function(){" + $(sender).prop('href') + "}, 50);");
+            return false;
+        }
+
+    </script>
+
+    <!-- End modal -->
+
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="bower_components/fullcalendar/assets/fullcalendar.min.css">
+    <link rel="stylesheet" href="bower_components/fullcalendar/assets/fullcalendar.print.min.css" media="print">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/assets/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker 
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+-->
+    <!-- datepicker  -->
+    <link href="bower_components/datepicker/datepicker.css" rel="stylesheet" media="screen">
+    <link href="bower_components/datepicker/prettify.css" rel="stylesheet">
+    <script src="bower_components/datepicker/prettify.js"></script>
+
+    <script src="bower_components/datepicker/bootstrap-datepicker.js"></script>
+    <script src="bower_components/datepicker/bootstrap-datepicker-thai.js"></script>
+    <script src="bower_components/datepicker/bootstrap-datepicker.th.js"></script>
+
+    <script>
+        $(function () {
+            var d = new Date();
+            var toDay = d.getDate() + '/' + (d.getMonth() + 1) + '/' + (d.getFullYear() + 543);
+            $("#datepicker-th").datepicker({
+                dateFormat: 'dd/mm/yyyy',
+                isBuddhist: true,
+                defaultDate: toDay,
+                autoclose: true
+            });
+        });
+    </script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="bower_components/select2/assets/css/select2.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+
+
+    <script language="javascript">
+        function AllowOnlyIntegers() {
+            var keyCode = event.keyCode;
+            if (keyCode >= 48 && keyCode <= 57) {
+                event.returnValue = true;
+            } else {
+                event.returnValue = false;
+            }
+        }
+
+        function AllowOnlyDouble() {
+            var keyCode = event.keyCode;
+            if (keyCode >= 48 && keyCode <= 57) {
+                event.returnValue = true;
+            } else if (keyCode == 46) {
+                event.returnValue = true;
+            } else {
+                event.returnValue = false;
+            }
+        }
+
+        function AllowOnlyEnglishs() {
+            var keyCode = event.keyCode;
+            if (keyCode >= 58 && keyCode <= 122) {
+                event.returnValue = true;
+            } else {
+                event.returnValue = false;
+            }
+        }
+
+        function NotAllowOther() {
+            var keyCode = event.keyCode;
+            if (keyCode >= 128) {
+                event.returnValue = true;
+            } else {
+                event.returnValue = false;
+            }
+        }
+
+        function NotAllowThai() {
+            var keyCode = event.keyCode;
+            if (keyCode >= 45 && keyCode <= 57) {
+                event.returnValue = true;
+            } else if (keyCode >= 64 && keyCode <= 90) {
+                event.returnValue = true;
+            } else if (keyCode == 95) {
+                event.returnValue = true;
+            } else if (keyCode >= 97 && keyCode <= 122) {
+                event.returnValue = true;
+            } else if (keyCode == 127) {
+                event.returnValue = true;
+            } else if (keyCode == 150) {
+                event.returnValue = true;
+            } else {
+                event.returnValue = false;
+            }
+        }
+    </script>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body class="hold-transition skin-green sidebar-mini">
+    <form id="form2" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+
+        <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+            <div class="app-header header-shadow">
+                <div class="app-header__logo">
+                    <a href="Home.aspx" target="_blank">
+                        <div class="logo-src"></div>
+
+                    </a>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="app-header__menu">
+                    <span>
+                        <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                            <span class="btn-icon-wrapper">
+                                <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            </span>
+                        </button>
+                    </span>
+                </div>
+                <div class="app-header__content">
+                    <div class="app-header-left header-appname">
+                        <div class="header-appname"><b>ระบบบริหารเงินกู้</b></div>
+                        <div class="header-appname2">ฅนดงพุ</div>
+                    </div>
+
+                    <div class="app-header-right">
+                        <div class="header-btn-lg pr-0">
+                            <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left">
+                                        <div class="btn-group">
+                                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                                <asp:Image ID="imgUser2" runat="server" CssClass="rounded-circle" alt="User Image" Width="42" Height="42" />
+                                                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                            </a>
+                                            <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
+                                                <div class="dropdown-menu-header">
+                                                    <div class="dropdown-menu-header-inner bg-success">
+                                                        <div class="menu-header-image opacity-2" style="background-image: url(&#39;assets/images/dropdown-header/city3.jpg&#39;);"></div>
+                                                        <div class="menu-header-content text-left">
+                                                            <div class="widget-content p-0">
+                                                                <div class="widget-content-wrapper">
+                                                                    <div class="widget-content-left mr-3">
+                                                                        <asp:Image ID="imgUser1" runat="server" CssClass="rounded-circle" alt="User Image" Width="42" Height="42" />
+                                                                    </div>
+                                                                    <div class="widget-content-left">
+                                                                        <div class="widget-heading">
+                                                                            <asp:Label ID="lblUserName1" runat="server" Text=""></asp:Label>
+                                                                        </div>
+                                                                        <div class="widget-subheading opacity-8">
+                                                                            <asp:Label ID="lblProfileDesc" runat="server" Text=""></asp:Label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="widget-content-right mr-2">
+                                                                        <a href="Default.aspx?logout=y" class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="grid-menu grid-menu-2col">
+                                                    <div class="no-gutters row">
+                                                        <div class="col-sm-6">
+                                                            <a class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-primary" href="UserInfo.aspx">
+                                                                <i class="pe-7s-users icon-gradient bg-primary btn-icon-wrapper mb-2"></i>ข้อมูลส่วนตัว</a>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <a class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger" href="ChangePassword.aspx">
+                                                                <i class="pe-7s-key icon-gradient bg-danger btn-icon-wrapper mb-2"></i>
+                                                                <b>เปลี่ยนรหัสผ่าน</b>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--  <ul class="nav flex-column">
+                                                <li class="nav-item-divider nav-item">
+                                                </li>
+                                                <li class="nav-item-btn text-center nav-item">
+                                                    <a class="btn-wide btn btn-primary btn-sm"></a>
+                                                </li>
+                                            </ul> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-content-left  ml-3 header-user-info">
+                                        <div class="widget-heading">
+                                            <asp:Label ID="lblUsername2" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div class="widget-subheading">
+                                            <asp:Label ID="lblUserDesc" runat="server" Text=""></asp:Label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="app-main">
+                <div class="app-sidebar sidebar-shadow">
+                    <div class="app-header__logo">
+                        <div class="logo-src"></div>
+                        <div class="header__pane ml-auto">
+                            <div>
+                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                    <span class="hamburger-box">
+                                        <span class="hamburger-inner"></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-header__mobile-menu">
+                        <div>
+                            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-header__menu">
+                        <span>
+                            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                                <span class="btn-icon-wrapper">
+                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="scrollbar-sidebar ps ps--active-y">
+                        <div class="app-sidebar__inner">
+                            <ul class="vertical-nav-menu metismenu">                              
+
+                                <% If Request("m") = "h" Then %>
+                                <li><a class="mm-active" href="Home.aspx?m=h"><i class="metismenu-icon pe-7s-keypad"></i>Dashboard</a></li>
+                                <% Else %>
+                                <li><a href="Home.aspx?m=h"><i class="metismenu-icon pe-7s-keypad"></i>Dashboard</a></li>
+                                <% End If %>
+                               
+
+                                <% If Request("m") = "c" Then  %>
+                                <li><a class="mm-active" href="Customer.aspx?m=c"><i class="metismenu-icon pe-7s-user-female"></i>ลูกค้า</a></li>
+                                <% Else %>
+                                <li><a href="Customer.aspx?m=c"><i class="metismenu-icon pe-7s-user-female"></i>ลูกค้า</a></li>
+                                <% End If %>
+
+
+                                <li class="app-sidebar__heading">ระบบซื้อ-ขายอ้อย</li>
+
+                                <% If Request("m") = "b" Then  %>
+                                <li><a class="mm-active" href="Price.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
+                                <% Else %>
+                                <li><a href="Price.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
+                                <% End If %>
+                                <% If Request("m") = "list" Then  %>
+                                <li><a class="mm-active" href="Price.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
+                                <% Else %>
+                                <li><a href="Price.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
+                                <% End If %>
+                                <% If Request("m") = "comp" Then  %>
+                                <li><a class="mm-active" href="Company.aspx?m=comp"><i class="metismenu-icon lnr-apartment"></i>โรงงาน/บริษัท</a></li>
+                                <% Else %>
+                                <li><a href="Company.aspx?m=comp"><i class="metismenu-icon lnr-apartment"></i>โรงงาน/บริษัท</a></li>
+                                <% End If %>
+                                <% If Request("m") = "pc" Then  %>
+                                <li><a class="mm-active" href="Price.aspx?m=pc"><i class="metismenu-icon pe-7s-calculator"></i>กำหนดราคา</a></li>
+                                <% Else %>
+                                <li><a href="Price.aspx?m=pc"><i class="metismenu-icon pe-7s-calculator"></i>กำหนดราคา</a></li>
+                                <% End If %>
+
+
+                                <li class="app-sidebar__heading">ระบบเงินกู้</li>
+
+                                <% If Request("m") = "ag" Then %>
+                                <li><a class="mm-active" href="AgreementList?m=ag"><i class="metismenu-icon pe-7s-news-paper"></i>สัญญา</a></li>
+                                <% Else %>
+                                <li><a href="AgreementList?m=ag"><i class="metismenu-icon pe-7s-news-paper"></i>สัญญา</a></li>
+                                <% End If %>
+                                
+                                <% If Request("m") = "acc" Then %>
+                                <li><a class="mm-active" href="Card?m=acc"><i class="metismenu-icon pe-7s-cash"></i>บัญชีเงินกู้</a></li>
+                                <% Else %>
+                                <li><a href="Card?m=acc"><i class="metismenu-icon pe-7s-cash"></i>บัญชีเงินกู้</a></li>
+                                <% End If %>
+
+                                <% If Request("m") = "pay" Then %>
+                                <li><a class="mm-active" href="Card?m=pay"><i class="metismenu-icon pe-7s-calculator"></i>ชำระเงิน</a></li>
+                                <% Else %>
+                                <li><a href="Card?m=pay"><i class="metismenu-icon pe-7s-calculator"></i>ชำระเงิน</a></li>
+                                <% End If %>
+                                                             
+                                  <% If Request("m") = "sb" Then%>
+                                <li><a class="mm-active" href="Subbook.aspx?m=sb"><i class="metismenu-icon pe-7s-ribbon"></i><span>รายการ Subbook</span></a></li>
+                                <% Else%>
+                                <li><a href="Subbook.aspx?m=sb"><i class="metismenu-icon pe-7s-ribbon"></i><span>รายการ Subbook</span></a></li>
+                                <% End If%>
+    <li class="app-sidebar__heading">REPORT</li>
+                                 <% If Request("m") = "dw" Then%>
+                                <li><a class="mm-active" href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
+                                <% Else%>
+                                <li><a href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
+                                <% End If%>
+
+
+                                <% If Request("m") = "rpt" Then  %>
+                                <li class="mm-active">
+                                    <% Else %>
+                                <li>
+                                    <% End If %>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-graph2"></i>รายงาน
+											<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul class="mm-collapse">
+                                        <% If Request("s") = "L1" Then %>
+                                        <li><a class="mm-active" href="ReportCompany.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
+                                        <% Else %>
+                                        <li><a href="ReportCompany.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
+                                        <% End If %>                              
+                                    </ul>
+                                </li>
+
+                                <% If Convert.ToInt32(Request.Cookies("ROLE_ID").Value) <= 2 Then%>
+                                
+                                <li class="app-sidebar__heading">Admin</li>
+
+                                 <% If Request("m") = "master" Then  %>
+                                 <li class="mm-active">
+                                     <% Else %>
+                                 <li>
+                                     <% End If %>
+                                      <a href="#">
+                                     <i class="metismenu-icon lnr-cog"></i>ข้อมูลหลัก
+                                          <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> 
+                                 </a>     
+                                     <ul class="mm-collapse">                                          
+                                         <% If Request("s") = "b" Then%>
+                                         <li><a class="mm-active" href="Bank.aspx?m=master&s=b"><i class="metismenu-icon pe-7s-piggy"></i><span>ธนาคาร</span></a></li>
+                                         <% Else%>
+                                         <li><a href="Bank.aspx?m=master&s=b"><i class="metismenu-icon pe-7s-piggy"></i><span>ธนาคาร</span></a></li>
+                                         <% End If%>
+
+                                         <% If Request("s") = "ba" Then%>
+                                         <li><a class="mm-active" href="BankAccount.aspx?m=master&s=ba"><i class="metismenu-icon pe-7s-wallet"></i><span>บัญชีเงินฝาก</span></a></li>
+                                         <% Else%>
+                                         <li><a href="BankAccount.aspx?m=master&s=ba"><i class="metismenu-icon pe-7s-wallet"></i><span>บัญชีเงินฝาก</span></a></li>
+                                         <% End If%>
+                                         <% If Request("s") = "ct" Then%>
+                                         <li><a class="mm-active" href="Cane.aspx?m=master&s=ct"><i class="metismenu-icon lnr-leaf"></i><span>ประเภทอ้อย</span></a></li>
+                                         <% Else%>
+                                         <li><a href="Cane.aspx?m=master&s=ct"><i class="metismenu-icon lnr-leaf"></i><span>ประเภทอ้อย</span></a></li>
+                                         <% End If%>
+                                         <% If Request("s") = "ac" Then%>
+                                         <li><a class="mm-active" href="Account.aspx?m=master&s=ac"><i class="metismenu-icon lnr-leaf"></i><span>รายการบัญชี</span></a></li>
+                                         <% Else%>
+                                         <li><a href="Account.aspx?m=master&s=ac"><i class="metismenu-icon lnr-leaf"></i><span>รายการบัญชี</span></a></li>
+                                         <% End If%>
+
+                                     </ul>
+                                 </li>
+
+
+
+                                <% If Request("s") = "u" Then%>
+                                <li><a class="mm-active" href="Users.aspx?m=u"><i class="metismenu-icon pe-7s-users"></i><span>User</span></a></li>
+                                <% Else%>
+                                <li><a href="Users.aspx?m=u"><i class="metismenu-icon pe-7s-users"></i><span>Users</span></a></li>
+                                <% End If%>
+
+                              
+                               
+
+
+                                <% End If %>
+
+                                <% If Request("m") = "ch" Then  %>
+                                <li><a class="mm-active" href="ChangePassword.aspx?m=ch"><i class="metismenu-icon pe-7s-key"></i>เปลี่ยนรหัสผ่าน</a></li>
+                                <% Else %>
+                                <li><a href="ChangePassword.aspx?m=ch"><i class="metismenu-icon pe-7s-key"></i>เปลี่ยนรหัสผ่าน</a></li>
+                                <% End If %>
+
+                                <li><a href="Default?logout=y"><i class="metismenu-icon pe-7s-lock"></i><span>Logout</span></a></li>
+
+                            </ul>
+                        </div>
+                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                        </div>
+                        <div class="ps__rail-y" style="top: 0px; height: 909px; right: 0px;">
+                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 791px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                        <!-- Main Content start -->
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                    <div class="app-wrapper-footer">
+                        <div class="app-footer">
+                            <div class="app-footer__inner">
+                                <div class="app-footer-left">
+                                    <!-- footer left -->
+                                    <div class="footer">
+                                        <footer class="main-footer-login">
+                                            <div class="text-center hidden-xs">
+                                                <strong>Copyright &copy; 2022-2024 <a href="https://kondongpu.com">ฅนดงพุ</a>.</strong> All rights reserved.					
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </div>
+                                <div class="app-footer-right">
+                                    <!--  footer right -->
+                                    <b>Version</b>
+                                    <asp:Label ID="Label1" runat="server" Text="1.0.0"></asp:Label>&nbsp;&nbsp;<b>Release</b> 2022.06.01
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-drawer-overlay d-none animated fadeIn"></div>
+
+        <!-- Modal HTML -->
+        <div id="modal-alert" class="modal fade" role="dialog" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><span id="spnTitle"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><span id="spnMsg"></span>.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="modal-success" class="modal fade" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons check_circle">&#xe86c;</i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4><span id="spnTitleS"></span></h4>
+                        <p><span id="spnMsgS"></span></p>
+                        <button class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="modal-warningalert" class="modal fade" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-warningalert">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons cancel">&#xe5c9;</i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4><span id="spnTitleW"></span></h4>
+                        <p><span id="spnMsgW"></span></p>
+                        <button class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-warninginfo" class="modal fade" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-warninginfo">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <i class="material-icons warning">&#xe002;</i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4><span id="spnTitleInfo"></span></h4>
+                        <p><span id="spnMsgInfo"></span></p>
+                        <button class="btn btn-success" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- End Modal --->
+
+
+    </form>
+
+
+
+    <!-- jQuery 3 
+<script src="bower_components/jquery/assets/jquery.min.js"></script>
+-->
+    <!-- jQuery UI 1.11.4 
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+-->
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip 
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+-->
+
+    <!-- Bootstrap 3.3.7 
+<script src="bower_components/bootstrap/assets/js/bootstrap.min.js"></script>
+-->
+
+    <!-- daterangepicker 
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+    <!-- datepicker 
+<script src="bower_components/bootstrap-datepicker/assets/js/bootstrap-datepicker.min.js"></script>
+    -->
+    <!-- date-range-picker 
+<script src="plugins/daterangepicker/daterangepicker.js"></script>    
+-->
+
+    <!-- จำเป็นต่อการ ยุบ/ขยาย box-->
+    <script src="assets/js/adminlte.min.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+
+    <!-- fullCalendar -->
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/fullcalendar/assets/fullcalendar.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- Select2 -->
+    <script src="bower_components/select2/assets/js/select2.full.min.js"></script>
+
+    <script>
+        $(function () {
+            $('.select2').select2()
+        })
+    </script>
+
+    <!-- iCheck
+	<script src="plugins/iCheck/icheck.min.js"></script>
+
+	<script>
+		$(function() {
+			//Initialize Select2 Elements
+			$('.select2').select2()
+
+			//iCheck for checkbox and radio inputs
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass: 'iradio_minimal-blue'
+			})
+			//Red color scheme for iCheck
+			$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+				checkboxClass: 'icheckbox_minimal-red',
+				radioClass: 'iradio_minimal-red'
+			})
+			//Flat red color scheme for iCheck
+			$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+				checkboxClass: 'icheckbox_flat-green',
+				radioClass: 'iradio_flat-green'
+			})
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('input[type="radio"]').iCheck({
+				checkboxClass: 'icheckbox_flat-blue',
+				radioClass: 'iradio_flat-blue',
+				increaseArea: '20%' // optional
+			});
+		});
+	</script> -->
+
+    <script>
+        $(function () {
+
+            /* initialize the external events
+             -----------------------------------------------------------------*/
+            function init_events(ele) {
+                ele.each(function () {
+
+                    var eventObject = {
+                        title: $.trim($(this).text()) // use the element's text as the event title
+                    }
+
+                    // store the Event Object in the DOM element so we can get to it later
+                    $(this).data('eventObject', eventObject)
+
+                    // make the event draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 1070,
+                        revert: true, // will cause the event to go back to its
+                        revertDuration: 0 //  original position after the drag
+                    })
+
+                })
+            }
+
+            init_events($('#external-events div.external-event'))
+
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
+
+            var date = new Date()
+            var d = date.getDate(),
+                m = date.getMonth(),
+                y = date.getFullYear()
+            $('#calendar2').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                //Random default events
+                events: <%= json %>,
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar !!!
+                drop: function (date, allDay) { // this function is called when something is dropped
+
+                    // retrieve the dropped element's stored Event Object
+                    var originalEventObject = $(this).data('eventObject')
+
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject)
+
+                    // assign it the date that was reported
+                    copiedEventObject.start = date
+                    copiedEventObject.allDay = allDay
+                    copiedEventObject.backgroundColor = $(this).css('background-color')
+                    copiedEventObject.borderColor = $(this).css('border-color')
+                    copiedEventObject.color = $(this).css('color')
+
+                    $('#calendar2').fullCalendar('renderEvent', copiedEventObject, true)
+
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove()
+                    }
+
+                }
+            })
+
+            /* ADDING EVENTS */
+            var currColor = '#3c8dbc' //Red by default
+            //Color chooser button
+            var colorChooser = $('#color-chooser-btn')
+            $('#color-chooser > li > a').click(function (e) {
+                e.preventDefault()
+                //Save color
+                currColor = $(this).css('color')
+                //Add color effect to button
+                $('#add-new-event').css({
+                    'background-color': currColor,
+                    'border-color': currColor,
+                    'color': '#fff'
+                })
+            })
+            $('#add-new-event').click(function (e) {
+                e.preventDefault()
+                //Get value and make sure it is not null
+                var val = $('#new-event').val()
+                if (val.length == 0) {
+                    return
+                }
+
+                //Create events
+                var event = $('<div />')
+                event.css({
+                    'background-color': currColor,
+                    'border-color': currColor,
+                    'color': '#fff'
+                }).addClass('external-event')
+                event.html(val)
+                $('#external-events').prepend(event)
+
+                //Add draggable funtionality
+                init_events(event)
+
+                //Remove event from text input
+                $('#new-event').val('')
+            })
+        })
+    </script>
+
+    <script>
+        $(function () {
+            $('#tbdata').DataTable()
+            $('#tbdata2').DataTable()
+            $('#MainContent_grdData').DataTable()
+            $('#grdData2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+            $('#tbprice').DataTable({
+                "order": [[5, "desc"]],
+                "columnDefs": [
+                    { "type": "date", "target": [5, 6] }
+                ]
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
