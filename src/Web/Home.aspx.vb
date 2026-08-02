@@ -2,7 +2,7 @@
 
 Public Class Home
     Inherits System.Web.UI.Page
-    'Dim ctlPrc As New LocationController
+    'Dim ctlB As New LocationController
     Dim ctlR As New ReportController
     Dim dt As New DataTable
 
@@ -43,14 +43,14 @@ Public Class Home
             'dtNew = ctlN.News_GetFirstPage("2")
         End If
 
-        'dtProv = ctlPrc.RPT_Location_GetCountByProvince
+        'dtProv = ctlB.RPT_Location_GetCountByProvince
 
-        'dt = ctlPrc.RPT_Location_ByAccStatus_ForChart()
+        'dt = ctlB.RPT_Location_ByAccStatus_ForChart()
 
         'hDatachart1 = dt.Rows(0)(0).ToString()   'JsonConvert.SerializeObject(dt, Formatting.None)
 
 
-        'dtType = ctlPrc.RPT_Location_GetCountByType
+        'dtType = ctlB.RPT_Location_GetCountByType
 
         'catebarType = ""
         'catebarNHSO = ""
@@ -73,7 +73,7 @@ Public Class Home
         '        Next
 
 
-        'dtNHSO = ctlPrc.RPT_Location_GetCountByNHSOGroup
+        'dtNHSO = ctlB.RPT_Location_GetCountByNHSOGroup
 
         '        For i = 0 To dtNHSO.Rows.Count - 1
         '            catebarNHSO = catebarNHSO + "'" + dtNHSO.Rows(i)("GroupName") + "'"
@@ -85,7 +85,7 @@ Public Class Home
         '            End If
         '        Next
 
-        'dtGroup = ctlPrc.RPT_Location_GetCountByProvinceGroup
+        'dtGroup = ctlB.RPT_Location_GetCountByProvinceGroup
 
         'For i = 0 To dtGroup.Rows.Count - 1
         '    catebarGroup = catebarGroup + "'" + dtGroup.Rows(i)("ProvinceGroupName") + "'"
@@ -97,7 +97,7 @@ Public Class Home
         '    End If
         'Next
 
-        'dtChain = ctlPrc.RPT_Location_GetCountByChainGroup
+        'dtChain = ctlB.RPT_Location_GetCountByChainGroup
 
         'For i = 0 To dtChain.Rows.Count - 1
         '    catebarChain = catebarChain + "'" + dtChain.Rows(i)("ChainName") + "'"

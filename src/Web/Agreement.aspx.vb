@@ -84,7 +84,7 @@ Public Class Agreement
     End Sub
 
     'Private Sub LoadAgreementType()
-    '    ddlAgreementType.DataSource = ctlA.AgreementType_Get
+    '    ddlAgreementType.DataSource = ctlB.AgreementType_Get
     '    ddlAgreementType.DataTextField = "Name"
     '    ddlAgreementType.DataValueField = "UID"
     '    ddlAgreementType.DataBind()
@@ -201,7 +201,7 @@ Public Class Agreement
     Protected Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalCancel(this,'ยกเลิกคำขอ','คุณต้องการยกเลิกคำขอใช่หรือไม่?');", True)
 
-        'ctlA.Agreement_Cancel(StrNull2Zero(hdAgreementUID.Value))
+        'ctlB.Agreement_Cancel(StrNull2Zero(hdAgreementUID.Value))
         'Response.Redirect("ResultPage.aspx?p=request&t=cancel")
     End Sub
     Protected Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -211,8 +211,8 @@ Public Class Agreement
     End Sub
 
     Protected Sub cmdConfirm_Click(sender As Object, e As EventArgs) Handles cmdConfirm.Click
-        'Dim ctlA As New AgreementController
-        'ctlA.Agreement_SendApprove(hdAgreementUID.Value, hdCustomerUID.Value, Request.Cookies("UserID").Value)
+        'Dim ctlB As New AgreementController
+        'ctlB.Agreement_SendApprove(hdAgreementUID.Value, hdCustomerUID.Value, Request.Cookies("UserID").Value)
         'LoadAgreementData()
         'LoadAgreementData()
         'CheckStatusAgreement(StrNull2Long(hdAgreementUID.Value))
@@ -315,7 +315,7 @@ Public Class Agreement
 
     Private Sub cmdConfirmCancel_Click(sender As Object, e As EventArgs) Handles cmdConfirmCancel.Click
 
-        'ctlA.Agreement_Cancel(StrNull2Zero(hdAgreementUID.Value), txtCancelRemark.Text)
+        'ctlB.Agreement_Cancel(StrNull2Zero(hdAgreementUID.Value), txtCancelRemark.Text)
         'ctlC.RequestTransaction_Add(StrNull2Zero(hdAgreementUID.Value), StrNull2Zero(hdCustomerUID.Value), 0, "ยกเลิกคำขอ : " & txtCancelRemark.Text, Request.Cookies("UserID").Value)
 
         Response.Redirect("ResultPage.aspx?p=request&t=cancel")

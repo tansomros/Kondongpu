@@ -1,26 +1,28 @@
 ﻿Imports Microsoft.ApplicationBlocks.Data
-Public Class SubbookController
+Public Class BillController
     Inherits BaseClass
-    Public ds As DataSet = New DataSet
-    Public Function Subbook_GetByDate(Bdate As String, Edate As String) As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Subbook_GetByDate"), Bdate, Edate)
+    Public ds As New DataSet
+
+
+    Public Function Bill_GetByDate(Bdate As String, Edate As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_GetByDate"), Bdate, Edate)
         Return ds.Tables(0)
     End Function
 
-    Public Function Subbook_Add(ACCNO As String, Descriptions As String, CreateDate As String, BillNo As String, dr As Double, cr As Double, Chk As String, remark As String, bankno As String, CreateBy As String, UpdBy As String, LASTUPDATE As String, payType As String, CostNo As String) As Integer
-        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Subbook_Add"), ACCNO, Descriptions, CreateDate, BillNo, dr, cr, Chk, remark, bankno, CreateBy, UpdBy, LASTUPDATE, payType, CostNo)
+    Public Function Bill_Add(ACCNO As String, Descriptions As String, CreateDate As String, BillNo As String, dr As Double, cr As Double, Chk As String, remark As String, bankno As String, CreateBy As String, UpdBy As String, LASTUPDATE As String, payType As String, CostNo As String) As Integer
+        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Add"), ACCNO, Descriptions, CreateDate, BillNo, dr, cr, Chk, remark, bankno, CreateBy, UpdBy, LASTUPDATE, payType, CostNo)
     End Function
 
-    Public Function Subbook_Update(ACCNO As String, Descriptions As String, CreateDate As String, BillNo As String, dr As Double, cr As Double, Chk As String, remark As String, bankno As String, CreateBy As String, UpdBy As String, LASTUPDATE As String, pID As Integer, payType As String, CostNo As String) As Integer
-        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Subbook_Update"), ACCNO, Descriptions, CreateDate, BillNo, dr, cr, Chk, remark, bankno, CreateBy, UpdBy, LASTUPDATE, pID, payType, CostNo)
+    Public Function Bill_Update(ACCNO As String, Descriptions As String, CreateDate As String, BillNo As String, dr As Double, cr As Double, Chk As String, remark As String, bankno As String, CreateBy As String, UpdBy As String, LASTUPDATE As String, pID As Integer, payType As String, CostNo As String) As Integer
+        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Update"), ACCNO, Descriptions, CreateDate, BillNo, dr, cr, Chk, remark, bankno, CreateBy, UpdBy, LASTUPDATE, pID, payType, CostNo)
     End Function
 
-    Public Function BillHeader_Get() As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillHeader_Get"))
+    Public Function Bill_Get() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_Get"))
         Return ds.Tables(0)
     End Function
-    Public Function BillHeader_GetByUID(PUID As Integer) As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillHeader_GetByUID"), PUID)
+    Public Function Bill_GetByUID(PUID As Integer) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_GetByUID"), PUID)
         Return ds.Tables(0)
     End Function
 
@@ -42,24 +44,26 @@ Public Class SubbookController
     End Function
 
 
-    Public Function Billing_Add(BillNumber As String _
-           , BillDate As String _
-           , CompanyCode As String _
-           , CustomerID As String _
-           , TotalWeight As Double _
-           , TotalNetPrice As Double _
-           , TotalDeduct As Double _
-           , Balance As Double _
-           , Cuser As Integer) As Integer
-        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("BillHeader_Save"), BillNumber _
-           , StrNull2Zero(BillDate) _
-           , CompanyCode _
-           , CustomerID _
-           , TotalWeight _
-           , TotalNetPrice _
-           , TotalDeduct _
-           , Balance _
-           , Cuser)
+    Public Function Bill_Add(BillNumber As String _
+         , BillDate As String _
+         , CompanyCode As String _
+         , CustomerID As String _
+         , TotalWeight As Double _
+         , TotalNetPrice As Double _
+         , TotalDeduct As Double _
+         , Balance As Double _
+         , Remark As String _
+         , Cuser As Integer) As Integer
+        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Save"), BillNumber _
+         , StrNull2Zero(BillDate) _
+         , CompanyCode _
+         , CustomerID _
+         , TotalWeight _
+         , TotalNetPrice _
+         , TotalDeduct _
+         , Balance _
+         , Remark _
+         , Cuser)
     End Function
     Public Function BillDetail_GetByBillNumber(BillNumber As String) As DataTable
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillDetail_GetByBillNumber"), BillNumber)
@@ -82,9 +86,9 @@ Public Class SubbookController
 
         Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("BillDetail_Add"), BillNumber, BillReference, ACCID, NetPrice, CUser)
     End Function
-    Public Function BillHeader_Delete(pBillNumber As String) As Integer
+    Public Function Bill_Delete(pBillNumber As String) As Integer
 
-        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("BillHeader_Delete"), pBillNumber)
+        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Delete"), pBillNumber)
 
     End Function
 

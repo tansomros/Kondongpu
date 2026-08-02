@@ -49,10 +49,10 @@
                             <tr>
                                 <td class="text-center"><% =String.Concat(row("AccNo")) %></td>                                 
                                 <td><% =String.Concat(row("CustomerName")) %></td>     
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("CreditAmount")).ToString("#,##0") %></td>
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("CreditBalance")).ToString("#,##0") %></td>
-                                <td class="text-right text-bold text-success"><% =KDP.DBNull2Dbl(row("LoanAmount")).ToString("#,##0") %></td>
-                                <td class="text-right text-bold text-danger"><% =KDP.DBNull2Dbl(row("DebtBalance")).ToString("#,##0")  %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("CreditAmount")).ToString("#,##0") %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("CreditBalance")).ToString("#,##0") %></td>
+                                <td class="text-right text-bold text-success"><% =Kondongpu.DBNull2Dbl(row("LoanAmount")).ToString("#,##0") %></td>
+                                <td class="text-right text-bold text-danger"><% =Kondongpu.DBNull2Dbl(row("DebtBalance")).ToString("#,##0")  %></td>
                                 <td class="text-center"><% =String.Concat(row("CardStatusName")) %></td>
                                 <td class="text-center" style="width:220px">    
                                       <% If String.Concat(row("CardStatus")) = "A" Then %>

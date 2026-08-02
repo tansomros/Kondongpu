@@ -177,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="A.aspx" />
+    <Content Include="Bill.aspx" />
+    <Content Include="BillDetail.aspx" />
+    <Content Include="PriceModify.aspx" />
     <Content Include="AgreementNew.aspx" />
     <Content Include="Account.aspx" />
     <Content Include="Cane.aspx" />
@@ -271,6 +274,27 @@
     </Compile>
     <Compile Include="A.aspx.vb">
       <DependentUpon>A.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Bill.aspx.designer.vb">
+      <DependentUpon>Bill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bill.aspx.vb">
+      <DependentUpon>Bill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BillDetail.aspx.designer.vb">
+      <DependentUpon>BillDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BillDetail.aspx.vb">
+      <DependentUpon>BillDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PriceModify.aspx.designer.vb">
+      <DependentUpon>PriceModify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PriceModify.aspx.vb">
+      <DependentUpon>PriceModify.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="AgreementNew.aspx.designer.vb">
@@ -375,7 +399,7 @@
     <Compile Include="Controller\ReportServerCredentials.vb" />
     <Compile Include="Controller\AgreementController.vb" />
     <Compile Include="Controller\RoleController.vb" />
-    <Compile Include="Controller\SubbookController.vb" />
+    <Compile Include="Controller\BillController.vb" />
     <Compile Include="Controller\SystemConfigController.vb" />
     <Compile Include="Controller\UploadingUtils.vb" />
     <Compile Include="Controller\UserController.vb" />

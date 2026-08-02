@@ -291,7 +291,7 @@ Public Class LoanNew
 
     Private Sub cmdConfirmCancel_Click(sender As Object, e As EventArgs) Handles cmdConfirmCancel.Click
         ctlC.CardDetail_Delete(StrNull2Zero(hdCardDetailUID.Value), txtCancelRemark.Text, Request.Cookies("UserID").Value)
-        'ctlPrc.RequestTransaction_Add(StrNull2Zero(hdRequestUID.Value), StrNull2Zero(hdLocationUID.Value), 0, "ยกเลิกคำขอ : " & txtCancelRemark.Text, Request.Cookies("UserID").Value)
+        'ctlB.RequestTransaction_Add(StrNull2Zero(hdRequestUID.Value), StrNull2Zero(hdLocationUID.Value), 0, "ยกเลิกคำขอ : " & txtCancelRemark.Text, Request.Cookies("UserID").Value)
         ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalSuccess(this,'Success','ลบ/ยกเลิก รายการกู้เรียบร้อย');", True)
         'Response.Redirect("ResultPage.aspx?p=request&t=cancel")
     End Sub

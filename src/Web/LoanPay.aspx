@@ -302,7 +302,7 @@
                             <tr>
                                 <td class="text-center"><% =String.Concat(row("Code")) %></td>                                 
                                 <td class="text-center"><% =String.Concat(row("LoanDate")) %></td>     
-                                <td class="text-center"><% =KDP.DBNull2Dbl(row("Pay_Amount")).ToString("#,###.#0") %></td>
+                                <td class="text-center"><% =Kondongpu.DBNull2Dbl(row("Pay_Amount")).ToString("#,###.#0") %></td>
                                 <td class="text-center"><% =String.Concat(row("PayType")) %></td>                               
                                 <td class="text-center text-bold text-success"><% =String.Concat(row("SlipPath")) %></td> 
                                 <td class="text-center" style="width:50px">                                   

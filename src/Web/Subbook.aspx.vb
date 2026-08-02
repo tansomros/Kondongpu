@@ -3,7 +3,7 @@ Imports Org.BouncyCastle.Crypto
 
 Public Class Subbook
     Inherits System.Web.UI.Page
-    Dim ctlR As New SubbookController
+    Dim ctlR As New BillController
     Public dtREQ As New DataTable
     Dim ctlM As New MasterController
     Dim dt As New DataTable
@@ -27,7 +27,7 @@ Public Class Subbook
             'Case "apv"
             '    lblTitle.Text = ""
             '    If Request.Cookies("ROLE_ID").Value = 2 Then
-            '        dtPrice = ctlA.Request_GetForApproval(Request.Cookies("LoginLocationUID").Value, Request.Cookies("UserID").Value, Request.Cookies("PeriodID").Value)
+            '        dtBill = ctlB.Request_GetForApproval(Request.Cookies("LoginLocationUID").Value, Request.Cookies("UserID").Value, Request.Cookies("PeriodID").Value)
             '    End If
             '    Case Else
             '        Response.Redirect("Home.aspx")
@@ -36,7 +36,7 @@ Public Class Subbook
         End If
     End Sub
     'Private Sub LoadCaneType()
-    '    ddlType.DataSource = ctlPrc.RequestType_GetForReport
+    '    ddlType.DataSource = ctlB.RequestType_GetForReport
     '    ddlType.DataTextField = "Name"
     '    ddlType.DataValueField = "UID"
     '    ddlType.DataBind()
@@ -65,7 +65,7 @@ Public Class Subbook
         Bdate = ConvertStrDate2DBString(txtStartDate.Text)
         Edate = ConvertStrDate2DBString(txtEndDate.Text)
 
-        dtREQ = ctlR.Subbook_GetByDate(Bdate, Edate)
+        dtREQ = ctlR.Bill_GetByDate(Bdate, Edate)
         Dim totalR, totalP As Double
         totalP = 0
         totalR = 0

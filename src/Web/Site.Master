@@ -363,14 +363,14 @@
                                 <li class="app-sidebar__heading">ระบบซื้อ-ขายอ้อย</li>
 
                                 <% If Request("m") = "b" Then  %>
-                                <li><a class="mm-active" href="Price.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
+                                <li><a class="mm-active" href="BillDetail.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
                                 <% Else %>
-                                <li><a href="Price.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
+                                <li><a href="BillDetail.aspx?m=b"><i class="metismenu-icon lnr-license"></i>ออกใบเสร็จ</a></li>
                                 <% End If %>
                                 <% If Request("m") = "list" Then  %>
-                                <li><a class="mm-active" href="Price.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
+                                <li><a class="mm-active" href="Bill.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
                                 <% Else %>
-                                <li><a href="Price.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
+                                <li><a href="Bill.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
                                 <% End If %>
                                 <% If Request("m") = "comp" Then  %>
                                 <li><a class="mm-active" href="Company.aspx?m=comp"><i class="metismenu-icon lnr-apartment"></i>โรงงาน/บริษัท</a></li>
@@ -836,9 +836,15 @@
                 'autoWidth': false
             })
             $('#tbprice').DataTable({
-                "order": [[5, "desc"]],
+                "order": [[9, "desc"]],
                 "columnDefs": [
-                    { "type": "date", "target": [5, 6] }
+                    { "type": "date", "target": [5, 6,9] }
+                ]
+            })
+            $('#tbbill').DataTable({
+                "order": [[0, "desc"]],
+                "columnDefs": [
+                    { "type": "date", "target": [1] }
                 ]
             })
 

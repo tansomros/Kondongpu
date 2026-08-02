@@ -57,7 +57,7 @@
                                     <div id="dragZone">
                                         <span class="dragZoneText">ลากรูปมาวางที่นี่</span>
                                     </div>
-                                    <img id="uploadedImage" src='<% Response.Write(KDP.PictureUser & "/" & Session("userimg")) %>' width="150" height="150" class="profile-user-img img-responsive img-circle" alt="" onload="onImageLoad()" />
+                                    <img id="uploadedImage" src='<% Response.Write(Kondongpu.PictureUser & "/" & Session("userimg")) %>' width="150" height="150" class="profile-user-img img-responsive img-circle" alt="" onload="onImageLoad()" />
                                     <div id="dropZone" class="hidden">
                                         <span class="dropZoneText">Drop an image here</span>
                                     </div>

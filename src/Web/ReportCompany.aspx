@@ -88,9 +88,9 @@
                                 <td class="text-center"><% =String.Concat(row("Code")) %></td>
                                 <td class="text-center"><% =Format(row("AgreementDate"), "dd/MM/yyyy") %></td>
                                 <td><% =String.Concat(row("CustomerName")) %></td>                                
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("Amount")).ToString("#,##0.##") %></td>
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("PayAmount")).ToString("#,##0.##") %></td>                                
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("Amount") - row("PayAmount")).ToString("#,##0.##")  %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("Amount")).ToString("#,##0.##") %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("PayAmount")).ToString("#,##0.##") %></td>                                
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("Amount") - row("PayAmount")).ToString("#,##0.##")  %></td>
                                 <td class="text-center"><% =String.Concat(row("Interest")) %></td>
                                 <td class="text-center"><% =String.Concat(row("AgreementTypeName")) %></td>
                                 <td class="text-center"><% =String.Concat(row("AgreementStatusName")) %></td>

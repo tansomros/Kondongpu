@@ -9,10 +9,10 @@ Public Class A
 
         'Dim ctlFDA As New FDAServiceController
         'Dim NewCode As String
-        'Dim ctlA As New LocationController
+        'Dim ctlB As New LocationController
         'Dim dt As New DataTable
 
-        'dt = ctlA.Location_GetNoNewCode()
+        'dt = ctlB.Location_GetNoNewCode()
 
         'For i = 0 To dt.Rows.Count - 1
         '    With dt.Rows(i)
@@ -20,7 +20,7 @@ Public Class A
         '            NewCode = ""
         '            Try
         '                NewCode = ctlFDA.ConvertLicenseToNewCode(String.Concat(.Item("LicenseNo1")))
-        '                ctlA.Location_UpdateNewCode(.Item("UID"), NewCode)
+        '                ctlB.Location_UpdateNewCode(.Item("UID"), NewCode)
         '            Catch ex As Exception
 
         '            End Try

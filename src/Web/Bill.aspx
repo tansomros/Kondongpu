@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Price.aspx.vb" Inherits="Kondongpu.Price" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Bill.aspx.vb" Inherits="Kondongpu.Bill" %>
 
 <%@ Import Namespace="System.Data" %>
 
@@ -12,7 +12,7 @@
                 <div class="page-title-icon">
                     <i class="pe-7s-calculator icon-gradient bg-success"></i>
                 </div>
-                <div>รายการกำหนดราคา
+                <div>รายการใบเสร็จ
                 </div>
             </div>
         </div>
@@ -30,14 +30,7 @@
                                 </div>
             </div>
             <div class="box-body">
-                <div class="row">
-                 <div class="col-lg-6 col-md-1 col-xl-1">
-                     <div class="form-group">
-                         <label>ปี</label>                         
-                         <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control select2" AutoPostBack="True">
-                         </asp:DropDownList>
-                     </div>
-                 </div>
+                <div class="row">                
                     <div class="col-lg-6 col-md-2 col-xl-2">
                         <div class="form-group">
                             <label>Start Date</label>
@@ -103,10 +96,10 @@
         </div>
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <i class="header-icon lnr-list icon-gradient bg-success"></i>Price List
+                <i class="header-icon lnr-list icon-gradient bg-success"></i>รายการใบเสร็จ
             <div class="btn-actions-pane-right">
                 <% If Convert.ToInt32(Request.Cookies("ROLE_ID").Value) = 1 Then%>
-                <a href="PriceModify?m=pc" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i>กำหนดราคาใหม่</a>
+                <a href="BillDetail?m=pc" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i>ออกใบเสร็จ</a>
                 <% End If %>
             </div>
             </div>
@@ -115,40 +108,34 @@
                     <table id="tbprice" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 60px">ปี</th>
-                                <th class="text-center" style="width: 120px">รหัสโรงงาน</th>
-                                <th class="text-center">ชื่อโรงงาน</th>
+                                <th class="text-center">เลขที่ใบเสร็จ</th>
+                                <th class="text-center">วันที่ออกใบเสร็จ</th>
+                                <th class="text-center">ชื่อลูกค้า</th>
+                                <th class="text-center">ชื่อเล่น</th>
+                                <th class="text-center">โรงงาน</th>
                                 <th class="text-center">จังหวัด</th>
-                                <th class="text-center">อ้อย</th>
-                                <th class="text-center">วันที่เริ่ม</th>
-                                <th class="text-center">วันที่สิ้นสุด</th>
-                                <th class="text-center">ราคา</th>
-                                <th  width="100" class="text-center">สถานะ</th>       
-                                <th class="text-center">วันที่แก้ไขล่าสุด</th>
+                                <th class="text-center">จำนวนเงิน</th>
+                                <th class="text-center">หัก</th>
+                                <th class="text-center">คงเหลือ</th>      
+                                <th class="text-center">หมายเหตุ</th>
                                 <th class="sorting_asc_disabled sorting_desc_disabled text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% For Each row As DataRow In dtPrice.Rows %>
-                            <tr>
-                                <td><% =String.Concat(row("PYear")) %></td>
-                                <td class="text-center"> <a href="PriceModify?id=<% =String.Concat(row("UID")) %>" data-toggle="tooltip" data-placement="top" data-original-title="ดูรายละเอียด"><% =String.Concat(row("CompanyCode")) %></a></td>
+                            <% For Each row As DataRow In dtBill.Rows %>                            <tr>
+                                <td class="text-center"> <a href="BillDetail?id=<% =String.Concat(row("UID")) %>" data-toggle="tooltip" data-placement="top" data-original-title="ดูรายละเอียด"><% =String.Concat(row("BillNumber")) %></a></td>
+                                <td><% =String.Concat(row("BillDTT")) %></td>                             
+                                <td><% =String.Concat(row("CustomerName")) %></td>
+                                <td class="text-center"><% =String.Concat(row("NickName")) %></td>
                                 <td><% =String.Concat(row("CompanyName")) %></td>
-                                <td><% =String.Concat(row("ProvinceName")) %></td>
-                                <td><% =String.Concat(row("CaneName")) %></td>
-                                <td class="text-center"><% =String.Concat(row("StartDTT")) %></td>
-                                <td class="text-center"><% =String.Concat(row("EndDTT")) %></td>
-                                <td class="text-center"><% =String.Concat(row("UnitPrice")) %></td>
-                                <td class="text-center">
-                                     <% If String.Concat(row("StatusFlag")) = "A" Then%>
-   <asp:Image ID="imgStatus" runat="server" ImageUrl="images/icon-ok.png" />
- <% End If %>
-                                </td>              
-                                   <td class="text-center"><% =String.Concat(row("UpdDTT")) %></td>
+                                <td><% =String.Concat(row("ProvinceName")) %></td> 
+                                <td class="text-center"><% =String.Concat(row("TotalNetPrice")) %></td>
+                                <td class="text-center"><% =String.Concat(row("TotalDeduct")) %></td>
+                                <td class="text-center"><% =String.Concat(row("Balance")) %></td>
+                                <td class="text-center"><% =String.Concat(row("Remark")) %></td>
                                 <td class="text-center" style="width: 50px">                                   
-                                    <a href="PriceModify?id=<% =String.Concat(row("UID")) %>" class="btn btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="ดูรายละเอียด"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="BillDetail?id=<% =String.Concat(row("UID")) %>" class="btn btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="ดูรายละเอียด"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 </td>
-
                             </tr>
                             <%  Next %>
                         </tbody>

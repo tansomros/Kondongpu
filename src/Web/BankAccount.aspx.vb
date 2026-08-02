@@ -99,7 +99,7 @@
             Exit Sub
         End If
 
-        'If ctlA.BankAccount_CheckDuplicate(txtAccountNo.Text) Then
+        'If ctlB.BankAccount_CheckDuplicate(txtAccountNo.Text) Then
         '    ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningInfo(this,'ผลการตรวจสอบ','บัญชีเงินฝากนี้มีอยู่่ในระบบแล้ว');", True)
         '    Exit Sub
         'End If

@@ -15,6 +15,11 @@ Public Class CompanyController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Company_GetBySearch"), pKey)
         Return ds.Tables(0)
     End Function
+    Public Function Company_GetForSelection() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Company_GetForSelection"))
+        Return ds.Tables(0)
+    End Function
+
 
     Public Function Company_CheckDupicateByCode(ByVal Code As String) As Boolean
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Company_CheckDupicateByCode"), Code)

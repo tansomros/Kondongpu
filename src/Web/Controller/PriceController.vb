@@ -27,8 +27,8 @@ Public Class PriceController
     Public Function Price_Delete(pCode As String) As Integer
         Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Price_Delete"), pCode)
     End Function
-    Public Function Price_Save(UID As Integer, CompanyCode As String, CaneUID As Integer, StartDate As String, EndDate As String, UnitPrice As Double, CUser As String) As Integer
-        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Price_Save"), UID, CompanyCode, CaneUID, StartDate, EndDate, UnitPrice, CUser)
+    Public Function Price_Save(UID As Integer, Year As Integer, CompanyUID As Integer, CaneUID As Integer, StartDate As String, EndDate As String, UnitPrice As Double, StatusFlag As String, CUser As String) As Integer
+        Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Price_Save"), UID, Year, CompanyUID, CaneUID, StartDate, EndDate, UnitPrice, StatusFlag, CUser)
     End Function
     Public Function Price_CheckDuplicate(CompanyCode As String, StartDate As String, EndDate As String, CaneType As Integer) As Boolean
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_CheckDuplicate"), CompanyCode, StartDate, EndDate, CaneType)

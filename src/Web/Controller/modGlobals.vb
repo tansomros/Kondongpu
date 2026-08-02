@@ -237,7 +237,35 @@ Public Module modGlobal
 
         Return Valid
     End Function
+    Public Function ConvertDate2DB(ByVal strDate As Date, Optional ByVal th_or_en As String = "") As String
+        Dim y As Integer
+        Dim m As Integer
+        Dim d As Integer
 
+        Select Case th_or_en.Trim.ToLower
+            Case "en"
+                y = getYearEng(strDate.Year)
+            Case "th"
+                y = getYearThai(strDate.Year)
+            Case Else
+                y = strDate.Year
+        End Select
+        m = strDate.Month
+        d = strDate.Day
+        ConvertDate2DB = m.ToString("00") & "/" & d.ToString("00") & "/" & y.ToString("0000")
+    End Function
+    Public Function getYearEng(ByVal y As Integer) As Integer
+        If y > 2020 Then
+            y -= 543
+        End If
+        Return y
+    End Function
+    Public Function getYearThai(ByVal y As Integer) As Integer
+        If y < 2020 Then
+            y += 543
+        End If
+        Return y
+    End Function
     Public Function ConvertDateToString(ByVal Adate As Date) As String
         Dim strDate(2) As String
         strDate(0) = CStr(Adate.Day)
@@ -674,7 +702,44 @@ Public Module modGlobal
             Return ""
         End If
     End Function
+    Public Function ConvertStrDate2ShotDateTH(ByVal dt As String) As String
 
+        If dt <> "" Then
+
+            Dim y As String = ""
+            Dim d As String = ""
+            Dim m As String = ""
+
+            Dim iY As Integer = 0
+
+            Dim str() As String
+            str = Split(dt, "/")
+
+            d = str(0).ToString
+            m = str(1).ToString
+
+            While (d.Length < 2)
+                d = ("0" + d)
+            End While
+
+            While (m.Length < 2)
+                m = ("0" + m)
+            End While
+
+            y = str(2)
+            iY = StrNull2Zero(str(2))
+
+            Do Until iY > 2500
+                iY = iY + 543
+            Loop
+            y = iY.ToString()
+
+            Return d + "/" + m + "/" + y
+
+        Else
+            Return ""
+        End If
+    End Function
     Public Function ConvertStrDate2DBString(ByVal dt As String) As String
         If dt <> "" Then
 

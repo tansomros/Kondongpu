@@ -94,8 +94,8 @@
                             <tr>
                                 <td class="text-center"><% =String.Concat(row("Code")) %></td>
                                 <td><% =String.Concat(row("Descriptions")) %></td>
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("RevAmount")).ToString("#,##0.##")  %></td>
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("PayAmount")).ToString("#,##0.##")  %></td>                         
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("RevAmount")).ToString("#,##0.##")  %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("PayAmount")).ToString("#,##0.##")  %></td>                         
                                
 
                             </tr>

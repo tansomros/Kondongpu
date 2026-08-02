@@ -6,6 +6,7 @@ Imports System.Configuration
 Imports System.Globalization
 Imports Microsoft.ApplicationBlocks.Data
 Imports System.Web.UI
+Imports DevExpress.Web
 
 Public Class BaseClass : Inherits ApplicationBaseClass
 
@@ -30,6 +31,9 @@ Public Class BaseClass : Inherits ApplicationBaseClass
     Public Shared ReportURL As String
     Public Shared ConnectionString As String
     Public Shared PassPhase As String
+
+    Public Shared isHeadAdd As Boolean = False
+    Public Shared isLineAdd As Boolean = False
 
 #Region "Private Members"
 
@@ -301,6 +305,58 @@ Public Class BaseClass : Inherits ApplicationBaseClass
         Next
     End Sub
 
+#Region "ClearData"
+    Public Shared Function ClearData(container As System.Web.UI.Control) As IEnumerable(Of System.Web.UI.Control)
+
+        Dim controlList As New List(Of System.Web.UI.Control)()
+
+        For Each ctrl As System.Web.UI.Control In container.Controls
+
+            ' Recursive
+            controlList.AddRange(ClearData(ctrl))
+
+            ' TextBox
+            If TypeOf ctrl Is TextBox Then
+                Dim textBox = DirectCast(ctrl, TextBox)
+
+                If textBox.Text <> "0" Then
+                    textBox.Text = String.Empty
+                End If
+            End If
+
+            ' DropDownList
+            If TypeOf ctrl Is DropDownList Then
+                Dim dropDown = DirectCast(ctrl, DropDownList)
+                dropDown.ClearSelection()
+            End If
+
+            ' CheckBox
+            If TypeOf ctrl Is CheckBox Then
+                Dim checkBox = DirectCast(ctrl, CheckBox)
+                checkBox.Checked = False
+            End If
+            If TypeOf ctrl Is ASPxTextBox Then
+                TryCast(ctrl, ASPxTextBox).Text = ""
+            End If
+            If TypeOf ctrl Is ASPxComboBox Then
+                TryCast(ctrl, ASPxComboBox).Value = Nothing
+            End If
+            If TypeOf ctrl Is ASPxSpinEdit Then
+                TryCast(ctrl, ASPxSpinEdit).Value = 0
+            End If
+            If TypeOf ctrl Is ASPxRadioButtonList Then
+                TryCast(ctrl, ASPxRadioButtonList).SelectedIndex = -1
+            End If
+            If TypeOf ctrl Is ASPxCheckBox Then
+                TryCast(ctrl, ASPxCheckBox).Checked = False
+            End If
+
+        Next
+
+        Return controlList
+
+    End Function
+#End Region
 #Region "Exec Database"
     Public Function getStrWhere(ByVal aField() As stcField) As String
         Dim i As Integer

@@ -349,10 +349,10 @@
                             <tr>
                                 <td class="text-center"><% =String.Concat(row("Code")) %></td>                                 
                                 <td class="text-center"><% =String.Concat(row("LoanDate")) %></td>     
-                                <td class="text-right"><% =KDP.DBNull2Dbl(row("Loan_Amount")).ToString("#,##0.##") %></td>
-                                <td class="text-center"><% =KDP.DBNull2Dbl(row("Int_Rate")).ToString("#,###.#0") %></td>
-                                <td class="text-right text-bold text-success"><% =KDP.DBNull2Dbl(row("Int_Total")).ToString("#,##0.##") %></td>
-                                <td class="text-right text-bold text-danger"><% =KDP.DBNull2Dbl(row("Loan_Total")).ToString("#,##0.##")  %></td>
+                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("Loan_Amount")).ToString("#,##0.##") %></td>
+                                <td class="text-center"><% =Kondongpu.DBNull2Dbl(row("Int_Rate")).ToString("#,###.#0") %></td>
+                                <td class="text-right text-bold text-success"><% =Kondongpu.DBNull2Dbl(row("Int_Total")).ToString("#,##0.##") %></td>
+                                <td class="text-right text-bold text-danger"><% =Kondongpu.DBNull2Dbl(row("Loan_Total")).ToString("#,##0.##")  %></td>
                                 <td class="text-center" style="width:50px">                                   
                                     <a href="LoanNew?m=l&id=<% =String.Concat(row("UID")) %>&cid=<% =String.Concat(row("CardUID")) %>"  data-toggle="tooltip" data-placement="top" data-original-title="ดู/ลบ"><i class="fa fa-search text-primary" aria-hidden="true"></i></a>  
                                      <a href="ReportViewer.aspx?rpt=pay&code=<% =String.Concat(row("Code")) %>&id=<% =String.Concat(row("UID")) %>" target="_blank" data-toggle="tooltip" data-placement="top" data-original-title="พิมพ์"><i class="fa fa-print text-success" aria-hidden="true"></i></a>  

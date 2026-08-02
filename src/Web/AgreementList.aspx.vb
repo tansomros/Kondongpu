@@ -23,7 +23,7 @@ Public Class AgreementList
             'Case "apv"
             '    lblTitle.Text = ""
             '    If Request.Cookies("ROLE_ID").Value = 2 Then
-            '        dtAgr = ctlA.Agreement_GetForApproval(Request.Cookies("LoginLocationUID").Value, Request.Cookies("UserID").Value, Request.Cookies("PeriodID").Value)
+            '        dtAgr = ctlB.Agreement_GetForApproval(Request.Cookies("LoginLocationUID").Value, Request.Cookies("UserID").Value, Request.Cookies("PeriodID").Value)
             '    End If
             '    Case Else
             '        Response.Redirect("Home.aspx")
