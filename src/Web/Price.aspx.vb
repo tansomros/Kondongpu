@@ -21,7 +21,7 @@ Public Class Price
         End If
     End Sub
     Private Sub LoadYear()
-        ddlYear.DataSource = ctlPrc.Price_GetYear
+        ddlYear.DataSource = ctlPrc.Price_GetYearForReport
         ddlYear.DataTextField = "DisplayYear"
         ddlYear.DataValueField = "PYear"
         ddlYear.DataBind()

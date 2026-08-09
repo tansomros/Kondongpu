@@ -10,6 +10,7 @@ Public Class Site
             Response.Redirect("Default.aspx")
         End If
 
+
         If Not IsPostBack Then
             LoadUserDetail()
             'LoadUserRole()

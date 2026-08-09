@@ -802,6 +802,10 @@ Public Class MasterController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CaneType_Get"))
         Return ds.Tables(0)
     End Function
+    Public Function CaneType_GetForSelection() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CaneType_GetForSelection"))
+        Return ds.Tables(0)
+    End Function
     Public Function CaneType_GetForReport() As DataTable
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CaneType_GetForReport"))
         Return ds.Tables(0)

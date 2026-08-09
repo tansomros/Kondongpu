@@ -99,7 +99,7 @@
                 <i class="header-icon lnr-list icon-gradient bg-success"></i>รายการใบเสร็จ
             <div class="btn-actions-pane-right">
                 <% If Convert.ToInt32(Request.Cookies("ROLE_ID").Value) = 1 Then%>
-                <a href="BillDetail?m=pc" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i>ออกใบเสร็จ</a>
+                <a href="BillDetail?m=b" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i>ออกใบเสร็จ</a>
                 <% End If %>
             </div>
             </div>

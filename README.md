@@ -4,7 +4,7 @@ built with
 ASP.NET Framework 4.5 ขึ้นไป 
 MS SQL Server
 
----
+--- 
 
 ## Technology
 
@@ -15,7 +15,7 @@ MS SQL Server
 
 ## ขั้นตอนการรันใน visual studio
 
-    ใน solution มีหลาย Project เลือกที่ต้องการรัน
+    ใน solution มีหลาย Project เลือกที่ต้องการรัน 
 
 
 ## มาตรฐานการร่วมพัฒนา (โปรดปฏิบัติตามอย่างเคร่งครัด)

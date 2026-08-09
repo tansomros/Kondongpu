@@ -22,6 +22,7 @@ Public Class PriceModify
             LoadYear()
             LoadCaneType()
             LoadCompanyToDDL()
+            LoadCompanyDetail(ddlCompany.SelectedValue)
             DisableControl()
             If Not IsNothing(Request("id")) Then
                 LoadPriceData()
@@ -42,7 +43,7 @@ Public Class PriceModify
         ddlYear.DataBind()
     End Sub
     Private Sub LoadCaneType()
-        ddlCane.DataSource = ctlM.CaneType_GetForReport
+        ddlCane.DataSource = ctlM.CaneType_Get
         ddlCane.DataTextField = "CaneName"
         ddlCane.DataValueField = "UID"
         ddlCane.DataBind()
@@ -55,6 +56,7 @@ Public Class PriceModify
                 .DataTextField = "CompanyName"
                 .DataValueField = "UID"
                 .DataBind()
+                .SelectedIndex = 0
             End With
         End If
     End Sub

@@ -25,15 +25,22 @@ Public Class BillController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_GetByUID"), PUID)
         Return ds.Tables(0)
     End Function
-
-    Public Function BillDetail_ChkDupBillReceipt(ByVal BillRef As String, CompCode As String, SendDate As String) As Boolean
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillDetail_ChkDupBillReceipt"), BillRef, CompCode, SendDate)
+    Public Function BillDetail_ChkDupBillReceipt(ByVal BillRef As String, CompUID As String) As Boolean
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillDetail_ChkDupBillReceipt"), BillRef, CompUID)
         If ds.Tables(0).Rows(0)(0) > 0 Then
             Return True
         Else
             Return False
         End If
     End Function
+    'Public Function BillDetail_ChkDupBillReceipt(ByVal BillRef As String, CompUID As String, SendDate As String) As Boolean
+    '    ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillDetail_ChkDupBillReceipt"), BillRef, CompUID, SendDate)
+    '    If ds.Tables(0).Rows(0)(0) > 0 Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
     Public Function BillDetail_ChkDupBillDeduct(ByVal BillRef As String, CompCode As String) As Boolean
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("BillDetail_ChkDupBillDeduct"), BillRef, CompCode)
         If ds.Tables(0).Rows(0)(0) > 0 Then
@@ -44,10 +51,10 @@ Public Class BillController
     End Function
 
 
-    Public Function Bill_Add(BillNumber As String _
+    Public Function Bill_Save(BillNumber As String _
          , BillDate As String _
-         , CompanyCode As String _
-         , CustomerID As String _
+         , CompanyUID As Integer _
+         , CustomerUID As Integer _
          , TotalWeight As Double _
          , TotalNetPrice As Double _
          , TotalDeduct As Double _
@@ -56,8 +63,8 @@ Public Class BillController
          , Cuser As Integer) As Integer
         Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Save"), BillNumber _
          , StrNull2Zero(BillDate) _
-         , CompanyCode _
-         , CustomerID _
+         , CompanyUID _
+         , CustomerUID _
          , TotalWeight _
          , TotalNetPrice _
          , TotalDeduct _

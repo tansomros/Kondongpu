@@ -16,8 +16,8 @@ Public Class PriceController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_GetByUID"), pSearch)
         Return ds.Tables(0)
     End Function
-    Public Function Price_GetForSale(CompanyCode As String, CaneType As Integer, SaleDate As String) As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_GetForSale"), CompanyCode, CaneType, SaleDate)
+    Public Function Price_GetForSale(CompanyUID As Integer, CaneType As Integer, SaleDate As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_GetForSale"), CompanyUID, CaneType, SaleDate)
         Return ds.Tables(0)
     End Function
     Public Function Price_GetBySearch(Year As String, StartDate As String, EndDate As String, CaneType As String, CompanyUID As String, Status As String) As DataTable
@@ -47,6 +47,9 @@ Public Class PriceController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_GetYear"))
         Return ds.Tables(0)
     End Function
-
+    Public Function Price_GetYearForReport() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Price_GetYearForReport"))
+        Return ds.Tables(0)
+    End Function
 #End Region
 End Class

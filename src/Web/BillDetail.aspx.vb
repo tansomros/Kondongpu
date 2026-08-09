@@ -1,9 +1,10 @@
-﻿Imports System.Drawing
+Imports System.Drawing
 Imports System.IO
 Imports System.Net
 Imports System.Net.Mail
 Imports System.Security.Cryptography
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip
 Imports DevExpress.XtraPrinting.Export.Pdf
 Imports DevExpress.XtraRichEdit.Layout
 Imports Org.BouncyCastle.Asn1.Ocsp
@@ -18,9 +19,18 @@ Public Class BillDetail
     Dim ctlC As New CustomerController
     Dim ctlS As New BillController
     Dim objDB As New BaseClass
-    Dim IsFindCust As Boolean = False
     Dim RowItemIndex As Integer = 0
-    Dim dtPay As New DataTable
+    Private Property dtBill As DataTable
+        Get
+            If Session("dtPay") Is Nothing Then
+                Session("dtPay") = New DataTable
+            End If
+            Return CType(Session("dtPay"), DataTable)
+        End Get
+        Set(value As DataTable)
+            Session("dtPay") = value
+        End Set
+    End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If IsNothing(Request.Cookies("KDP")) Then
@@ -35,8 +45,9 @@ Public Class BillDetail
             lblBillNumber.Text = "Auto ID"
             txtBillDate.Text = Today.Date.ToString("dd/MM/yyyy")
             txtSendDate.Text = Today.Date.ToString("dd/MM/yyyy")
+            dtBill.Columns.Clear()
 
-            With dtPay
+            With dtBill
                 .Columns.Add("BillNumber")
                 .Columns.Add("BillDate")
                 .Columns.Add("CompanyCode")
@@ -66,18 +77,20 @@ Public Class BillDetail
             LoadAccountToDDL()
 
             If Not Request("id") Is Nothing Then
-                LoadBillingData(Request("id"))
-                cmdSave.Visible = False
+                LoadBillData(Request("id"))
+                'cmdSave.Visible = False
                 cmdDelete.Visible = True
                 cmdPrint.Visible = True
             End If
         End If
-        'cmdDelete.Attributes.Add("onClick", "javascript:return confirm(""ต้องการลบข้อมูลนี้ใช่หรือไม่?"");")
 
-        txtUnitPrice.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
-        'txtRate.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
+        cmdDelete.Attributes.Add("onClick", "javascript:return confirm(""ต้องการลบใบเสร็จรับเงินนี้ใช่หรือไม่?"");")
+        'txtUnitPrice.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
+        txtWeight.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
+        txtGasPrice.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
+        txtDeductAmount.Attributes.Add("OnKeyPress", "return AllowOnlyDouble();")
     End Sub
-    Private Sub LoadBillingData(Id As Integer)
+    Private Sub LoadBillData(Id As Integer)
         dt = ctlS.Bill_GetByUID(Id)
         If dt.Rows.Count > 0 Then
             cmdPrint.Visible = True
@@ -85,7 +98,7 @@ Public Class BillDetail
                 hdBillUID.Value = .Item("UID")
                 lblBillNumber.Text = .Item("BillNumber")
                 txtBillDate.Text = .Item("BillDate")
-                ddlCustomer.SelectedValue = .Item("CustomerID")
+                ddlCustomer.SelectedValue = .Item("CustomerUID")
                 'txtCustomerName.Text = .Item("CustomerName") + "(" + .Item("NickName") + ")"
                 'txtCustomerAddress.Text = .Item("CustomerAddress")
                 'ddlCompany.SelectedItem.Text = .Item("CompanyCode")
@@ -98,6 +111,7 @@ Public Class BillDetail
                 lblTotalDeduct.Text = DBNull2Dbl(.Item("TotalDeduct")).ToString("#,###.##")
                 lblBalance.Text = DBNull2Dbl(.Item("Balance")).ToString("#,###.##")
 
+                LoadCarToDDL()
             End With
 
             Dim dtP As New DataTable
@@ -106,14 +120,16 @@ Public Class BillDetail
             dtP = ctlS.BillDetail_GetByBillNumber(lblBillNumber.Text)
             If dtP.Rows.Count > 0 Then
 
-                dtPay = dtP.Copy()
+                dtBill = dtP.Copy()
                 dtD = dtP.Copy()
 
                 dtP.DefaultView.RowFilter = "BillFlag='R'"
                 grdReceipt.DataSource = dtP
+                grdReceipt.DataBind()
 
                 dtD.DefaultView.RowFilter = "BillFlag='D'"
                 grdDeduct.DataSource = dtD
+                grdDeduct.DataBind()
 
             End If
 
@@ -127,7 +143,7 @@ Public Class BillDetail
             cmdPrint.Focus()
         Else
             cmdPrint.Visible = False
-            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningAlert(this,'ผลการตรวจสอบ','ไม่พบใบเสร็จรับเงินเลขที่ " & Request("Id") & "ในฐานข้อมูล');", True)
+            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningAlert(this,'ผลการตรวจสอบ','ไม่พบใบเสร็จรับเงินเลขที่ " & Request("Id") & " ในฐานข้อมูล');", True)
         End If
     End Sub
     Private Sub LoadCustomerToDDL()
@@ -142,19 +158,20 @@ Public Class BillDetail
         End If
     End Sub
     Private Sub LoadCarToDDL()
-        dt = ctlC.CarRegistration_Get(ddlCustomer.SelectedValue)
-        If dt.Rows.Count > 0 Then
+        Dim dtCar As New DataTable
+        dtCar = ctlC.CarRegistration_Get(ddlCustomer.SelectedValue)
+        If dtCar.Rows.Count > 0 Then
             With ddlCar
-                .DataSource = dt
+                .DataSource = dtCar
                 .DataTextField = "RegisNumber"
-                .DataValueField = "UID"
+                .DataValueField = "RegisNumber"
                 .DataBind()
             End With
         End If
     End Sub
     Private Sub LoadAccountToDDL()
         Dim ctlA As New AccountController
-        dt = ctla.Account_GetAll()
+        dt = ctlA.Account_GetAll()
         If dt.Rows.Count > 0 Then
             With ddlAccount
                 .DataSource = dt
@@ -165,14 +182,14 @@ Public Class BillDetail
         End If
     End Sub
     Private Sub LoadCaneType()
-        ddlCane.DataSource = ctlM.CaneType_Get
+        ddlCane.DataSource = ctlM.CaneType_GetForSelection
         ddlCane.DataTextField = "CaneName"
         ddlCane.DataValueField = "UID"
         ddlCane.DataBind()
     End Sub
     Private Sub LoadCompany()
         Dim ctlC As New CompanyController
-        ddlCompany.DataSource = ctlC.Company_Get
+        ddlCompany.DataSource = ctlC.Company_GetForSelection
         ddlCompany.DataTextField = "CompanyName"
         ddlCompany.DataValueField = "UID"
         ddlCompany.DataBind()
@@ -185,10 +202,20 @@ Public Class BillDetail
         hdRUID.Value = "0"
         hdDUID.Value = "0"
 
-        cmdPrint.Visible = False
-        Today.Date.ToString("dd/MM/yyyy")
+        lblTotalWeight.Text = ""
+        lblTotalNetPrice.Text = ""
+        lblTotalDeduct.Text = ""
+        lblBalance.Text = ""
 
-        dtPay.Rows.Clear()
+        cmdPrint.Visible = False
+        txtBillDate.Text = Today.Date.ToString("dd/MM/yyyy")
+        txtSendDate.Text = Today.Date.ToString("dd/MM/yyyy")
+
+        dtBill.Rows.Clear()
+        grdReceipt.DataSource = dtBill
+        grdDeduct.DataSource = dtBill
+        grdReceipt.DataBind()
+        grdDeduct.DataBind()
         lblBillNumber.Text = "Auto ID"
     End Sub
     Private Sub AddPayment2Grid(sBillNumber As String _
@@ -251,9 +278,9 @@ Public Class BillDetail
         End If
 
         Dim iRow As Integer = 0
-        iRow = dtPay.Rows.Count + 1
-        If BaseClass.isLineAdd = True Then
-            Dim dr As DataRow = dtPay.NewRow()
+        iRow = dtBill.Rows.Count + 1
+        If StrNull2Zero(hdRUID.Value) = 0 Then
+            Dim dr As DataRow = dtBill.NewRow()
             dr("BillNumber") = sBillNumber
             dr("BillDate") = sBillDate
             dr("CompanyCode") = sCompanyCode
@@ -276,41 +303,51 @@ Public Class BillDetail
             dr("iSendDate") = iSendDate
 
 
-            dtPay.Rows.Add(dr)
+            dtBill.Rows.Add(dr)
         Else
-            With dtPay.Rows(RowItemIndex)
-                .Item("BillNumber") = sBillNumber
-                .Item("BillDate") = sBillDate
-                .Item("CompanyCode") = sCompanyCode
-                .Item("CustomerID") = sCustomerID
-                .Item("CarRegisNumber") = sCarRegisNumber
-                .Item("CaneTypeUID") = sCaneTypeUID
-                .Item("CaneName") = sCaneName
-                .Item("Weight") = sWeight
-                .Item("UnitPrice") = sUnitPrice
-                .Item("NetPrice") = sNetPrice
-                .Item("BillFlag") = sBillFlag
-                .Item("SendDate") = sSendDate
-                .Item("BillReference") = sBillReference
-                .Item("Remark") = sRemark
-                .Item("UID") = sUID
-                .Item("ACCID") = sACCID
-                .Item("GasPrice") = sGasPrice
-                .Item("NetBalance") = sNetBalance
-                .Item("iSendDate") = iSendDate
-            End With
+            'หา row ที่ต้อง update จาก SEQUID ที่เก็บไว้ใน hdRUID
+            Dim editSeq As Integer = StrNull2Zero(hdRUID.Value)
+            For idx = 0 To dtBill.Rows.Count - 1
+                If StrNull2Zero(dtBill.Rows(idx)("SEQUID")) = editSeq Then
+                    With dtBill.Rows(idx)
+                        .Item("BillNumber") = sBillNumber
+                        .Item("BillDate") = sBillDate
+                        .Item("CompanyCode") = sCompanyCode
+                        .Item("CustomerID") = sCustomerID
+                        .Item("CarRegisNumber") = sCarRegisNumber
+                        .Item("CaneTypeUID") = sCaneTypeUID
+                        .Item("CaneName") = sCaneName
+                        .Item("Weight") = sWeight
+                        .Item("UnitPrice") = sUnitPrice
+                        .Item("NetPrice") = sNetPrice
+                        .Item("BillFlag") = sBillFlag
+                        .Item("SendDate") = sSendDate
+                        .Item("BillReference") = sBillReference
+                        .Item("Remark") = sRemark
+                        .Item("UID") = sUID
+                        .Item("ACCID") = sACCID
+                        .Item("GasPrice") = sGasPrice
+                        .Item("NetBalance") = sNetBalance
+                        .Item("iSendDate") = iSendDate
+                    End With
+                    Exit For
+                End If
+            Next
+            hdRUID.Value = "0"
 
         End If
 
         Dim dtP As New DataTable
-        dtP = dtPay.Copy
+        dtP = dtBill.Copy
         dtP.DefaultView.RowFilter = "BillFlag='R'"
         grdReceipt.DataSource = dtP
+        grdReceipt.DataBind()
 
         Dim dtD As New DataTable
-        dtD = dtPay.Copy
+        dtD = dtBill.Copy
         dtD.DefaultView.RowFilter = "BillFlag='D'"
         grdDeduct.DataSource = dtD
+        grdDeduct.DataBind()
 
 
         CalPrice()
@@ -321,6 +358,17 @@ Public Class BillDetail
     End Sub
 
     Protected Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        ReportTitle = "ใบเสร็จรับเงิน"
+        FagRPT = "BillingReport"
+        ReportName = "BillingReport.rpt"
+        ReportFormula = "{View_BillingDetail.BillNumber} = '" & lblBillNumber.Text & "'"
+
+
+        'ReportOneParameter = txtBillNumber.Text.Trim()
+        'fRptView.FileName = BaseClass.ReportPath & ReportName
+        'fRptView.SelectionFomula = ReportFormula
+
+
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('ReportViewer.aspx?rpt=rev&id=" & hdBillUID.Value & "&code=" & lblBillNumber.Text & "&RPTTYPE=PDF','_blank');", True)
     End Sub
 
@@ -329,55 +377,18 @@ Public Class BillDetail
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        'If StrNull2Zero(txtLoanBalance.Text) <= 0 Then
-        '    ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningInfo(this,'ผลการตรวจสอบ','ยอดหนี้คงเหลือ 0 บาท ไม่ต้องชำระอีก');", True)
-        '    Exit Sub
-        'End If
-        If txtSendDate.Text = "" Then
+
+        If txtBillDate.Text = "" Then
             ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningInfo(this,'ผลการตรวจสอบ','กรุณาระบุวันที่ชำระ');", True)
             Exit Sub
         End If
-
-        If StrNull2Zero(txtUnitPrice.Text) <= 0 Then
-            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningInfo(this,'ผลการตรวจสอบ','กรุณาระบุจำนวนเงิน');", True)
-            Exit Sub
-        End If
-        'If StrNull2Zero(txtUnitPrice.Text) > StrNull2Zero(txtLoanBalance.Text) Then
-        '    ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningInfo(this,'ผลการตรวจสอบ','ท่านระบุจำนวนชำระมากว่ายอดหนี้');", True)
-        '    Exit Sub
-        'End If
-
-        Dim PayDate As String
-        Dim BankAccount As String
-        PayDate = ConvertStrDate2DBString(txtSendDate.Text)
-        'If optPayType.SelectedValue = "T" Then
-        '    BankAccount = ddlBank.SelectedValue
-        'Else
-        '    BankAccount = ""
-        'End If
-
-        Dim SubbookNo As String = ""
-        'If hdPayUID.Value = "0" Then
-        '    SubbookNo = ctlM.RunningNumber2_New("S")
-        '    lblbillnumber.Text = SubbookNo
-        'End If
-
-        'Dim Desc As String = "รับชำระเงินกู้ " & txtCustomerName.Text & " เลขที่บัญชี " & lblBillNumber.Text & " จำนวนเงิน " & StrNull2Double(txtUnitPrice.Text).ToString("#,###.#0") & " บาท โดย" & optPayType.SelectedItem.Text
-
-
-
-        'ctlC.Payin_Add(SubbookNo, lblBillNumber.Text, "1", optPayType.SelectedValue, PayDate, StrNull2Double(txtUnitPrice.Text), "รับชำระเงินกู้", "", BankAccount, Desc, txtRemark.Text, Request.Cookies("UserID").Value)
-
-
-        'ctlU.User_GenLogfile(Request.Cookies("Username").Value, "ADD", "CardDetail", "กู้เงินกู้ใหม่:" & lblbillnumber.Text, "AccNo=" & lblBillNumber.Text & "|Amount=" & txtUnitPrice.Text & "|Ints=" & txtRate.Text & "|Day=" & txtDay.Text)
-
 
         If lblBillNumber.Text = "Auto ID" Then
             lblBillNumber.Text = objDB.RunningNumber_New("K")
             hdBillUID.Value = "0"
         End If
 
-        CreateBillHeader()
+        CreateBill()
         InsertBillDetail()
 
         If hdBillUID.Value = "0" Then
@@ -391,12 +402,12 @@ Public Class BillDetail
         cmdDelete.Visible = True
 
     End Sub
-    Private Sub CreateBillHeader()
+    Private Sub CreateBill()
 
-        ctlS.Bill_Add(lblBillNumber.Text _
+        ctlS.Bill_Save(lblBillNumber.Text _
                        , ConvertStrDate2DBString(txtBillDate.Text) _
-                       , String.Concat(ddlCompany.SelectedItem.Text) _
-                       , String.Concat(ddlCustomer.SelectedItem.Text) _
+                       , StrNull2Zero(ddlCompany.SelectedValue) _
+                       , StrNull2Zero(ddlCustomer.SelectedValue) _
                        , CDbl(lblTotalWeight.Text) _
                        , CDbl(lblTotalNetPrice.Text) _
                        , CDbl(lblTotalDeduct.Text) _
@@ -409,9 +420,9 @@ Public Class BillDetail
 
         ctlS.BillDetail_DeleteByBillNumber(lblBillNumber.Text)
 
-        For i = 0 To dtPay.Rows.Count - 1
+        For i = 0 To dtBill.Rows.Count - 1
 
-            With dtPay.Rows(i)
+            With dtBill.Rows(i)
 
                 If .RowState <> DataRowState.Deleted Then
                     ctlS.BillDetail_Add(lblBillNumber.Text _
@@ -441,16 +452,16 @@ Public Class BillDetail
         Dim sumR As Double = 0
         Dim sumD As Double = 0
 
-        For i = 0 To dtPay.Rows.Count - 1
-            If dtPay.Rows(i).RowState <> DataRowState.Deleted Then
-                If dtPay.Rows(i)("BillFlag") = "R" Then
-                    sumWeight = sumWeight + CDbl(dtPay.Rows(i)("Weight"))
-                    sumR = sumR + CDbl(dtPay.Rows(i)("NetPrice"))
+        For i = 0 To dtBill.Rows.Count - 1
+            If dtBill.Rows(i).RowState <> DataRowState.Deleted Then
+                If dtBill.Rows(i)("BillFlag") = "R" Then
+                    sumWeight = sumWeight + CDbl(dtBill.Rows(i)("Weight"))
+                    sumR = sumR + CDbl(dtBill.Rows(i)("NetPrice"))
                 Else
-                    sumD = sumD + CDbl(dtPay.Rows(i)("NetPrice"))
+                    sumD = sumD + CDbl(dtBill.Rows(i)("NetPrice"))
                 End If
 
-                sumGas = sumGas + StrNull2Double(dtPay.Rows(i)("GasPrice"))
+                sumGas = sumGas + StrNull2Double(dtBill.Rows(i)("GasPrice"))
             End If
         Next
 
@@ -464,7 +475,7 @@ Public Class BillDetail
     Private Sub LoadUnitPrice()
         If ddlCompany.SelectedItem.Text <> "" And ddlCane.SelectedItem.Text <> "" And txtSendDate.Text <> "" Then
             Dim ctlPc As New PriceController
-            dt = ctlPc.Price_GetForSale(ddlCompany.SelectedItem.Text, StrNull2Zero(ddlCane.SelectedItem.Text), ConvertDate2DB(txtSendDate.Text))
+            dt = ctlPc.Price_GetForSale(ddlCompany.SelectedValue, StrNull2Zero(ddlCane.SelectedValue), ConvertStrDate2DBDate(txtSendDate.Text))
             If dt.Rows.Count > 0 Then
                 txtUnitPrice.Text = DBNull2Dbl(dt.Rows(0)("UnitPrice")).ToString("#,###.##")
                 txtTotalPrice.Text = DBNull2Dbl(StrNull2Double(txtUnitPrice.Text) * StrNull2Double(txtWeight.Text)).ToString("#,###.##")
@@ -480,11 +491,11 @@ Public Class BillDetail
         dt = Nothing
     End Sub
     Private Sub ValidateCarRegis(sCarRegis As String, sFlag As String)
-        dt = ctlC.Customer_GetByCarRegis(sCarRegis, ddlCustomer.SelectedItem.Text)
+        dt = ctlC.Customer_GetByCarRegis(sCarRegis, ddlCustomer.SelectedValue)
         If dt.Rows.Count > 0 Then
             With dt.Rows(0)
                 'If sFlag = "R" Then
-                ddlCar.SelectedItem.Text = .Item("RegisNumber")
+                ddlCar.SelectedValue = .Item("RegisNumber")
                 'Else
                 '    txtCarDeduct.Text = .Item("RegisNumber")
                 'End If
@@ -524,7 +535,6 @@ Public Class BillDetail
     End Sub
 
     Private Sub cmdAddDeduct_Click(sender As Object, e As EventArgs) Handles cmdAddDeduct.Click
-        'AddDeduction2Grid(txtBillNumber.Text, txtAccCode.Text, txtAccName.Text, StrNull2Dbl(txtDeductAmount.Text), txtDeductRef.Text, StrNull2Zero(lblDUID.Text))
         AddPayment2Grid(lblBillNumber.Text, txtBillDate.Text, ddlCompany.SelectedValue, ddlCustomer.SelectedValue, "", "", "", ddlAccount.SelectedValue, ddlAccount.SelectedItem.Text, 0, 0, StrNull2Double(txtDeductAmount.Text), 0, StrNull2Double(txtDeductAmount.Text), "D", txtDeductRef.Text, StrNull2Zero(hdRUID.Value), StrNull2Zero(ddlAccount.SelectedValue))
 
         BaseClass.ClearData(pnDeduct)
@@ -537,20 +547,137 @@ Public Class BillDetail
         LoadCarToDDL()
     End Sub
 
-    Private Sub ddlCar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlCar.SelectedIndexChanged
-
-    End Sub
-
     Private Sub ddlCane_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlCane.SelectedIndexChanged
         LoadUnitPrice()
     End Sub
 
+    Private Sub ddlCompany_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlCompany.SelectedIndexChanged
+        LoadUnitPrice()
+    End Sub
+    Private Function DuplicateBill() As Boolean
+        If txtBillReference.Text.Trim() = "" Then Return False
 
-    'Private Sub optPayType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles optPayType.SelectedIndexChanged
-    '    If optPayType.SelectedValue = "T" Then
-    '        ddlBank.Enabled = True
-    '    Else
-    '        ddlBank.Enabled = False
-    '    End If
+        'ตรวจสอบซ้ำในรายการที่คีย์ไปแล้ว (dtBill) เฉพาะ BillFlag="R"
+        Dim dupRows() As DataRow = dtBill.Select("BillReference='" & txtBillReference.Text.Trim().Replace("'", "''") & "' AND BillFlag='R'")
+        If dupRows.Length > 0 Then
+            Return True
+        End If
+
+        'ตรวจสอบซ้ำในฐานข้อมูล
+        If ctlS.BillDetail_ChkDupBillReceipt(txtBillReference.Text, ddlCompany.SelectedValue) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Private Sub txtBillReference_TextChanged(sender As Object, e As EventArgs) Handles txtBillReference.TextChanged
+        If DuplicateBill() Then
+            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "MessageAlert", "openModalWarningAlert(this,'เลขที่บิลซ้ำ','บิลนี้ได้ทำการบันทึกในระบบแล้ว!');", True)
+        End If
+    End Sub
+
+    Private Sub txtWeight_TextChanged(sender As Object, e As EventArgs) Handles txtWeight.TextChanged
+        LoadUnitPrice()
+    End Sub
+
+    Private Sub grdReceipt_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles grdReceipt.RowCommand
+        If TypeOf e.CommandSource Is WebControls.ImageButton Then
+            Dim ButtonPressed As WebControls.ImageButton = e.CommandSource
+            Select Case ButtonPressed.ID
+                'Case "imgEdit"
+                '    EditReceipt(e.CommandArgument)
+                Case "imgDel"
+                    DeleteReceipt(e.CommandArgument)
+            End Select
+        End If
+    End Sub
+
+    'Private Sub EditReceipt(seqNo As Integer)
+    '    Dim iSeq As Integer = StrNull2Zero(seqNo)
+    '    For i = 0 To dtBill.Rows.Count - 1
+    '        If StrNull2Zero(dtBill.Rows(i)("SEQUID")) = iSeq And dtBill.Rows(i)("BillFlag").ToString() = "R" Then
+    '            With dtBill.Rows(i)
+    '                txtBillReference.Text = .Item("BillReference").ToString()
+    '                txtSendDate.Text = .Item("SendDate").ToString()
+    '                ddlCar.SelectedValue = .Item("CarRegisNumber").ToString()
+    '                ddlCane.SelectedValue = .Item("CaneTypeUID").ToString()
+    '                txtWeight.Text = .Item("Weight").ToString()
+    '                txtUnitPrice.Text = .Item("UnitPrice").ToString()
+    '                txtTotalPrice.Text = .Item("NetPrice").ToString()
+    '                txtGasPrice.Text = .Item("GasPrice").ToString()
+    '            End With
+    '            hdRUID.Value = iSeq.ToString()
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
+
+    Private Sub DeleteReceipt(seqNo As Integer)
+        Dim iRowIndex As Integer = StrNull2Zero(seqNo)
+        For i = 0 To dtBill.Rows.Count - 1
+            If (dtBill.Rows(i)("SEQUID") = iRowIndex) And (dtBill.Rows(i)("BillFlag") = "R") Then
+                dtBill.Rows(i).Delete()
+                dtBill.AcceptChanges()
+                Exit For
+            End If
+        Next
+
+        Dim dtR As New DataTable
+        dtR = dtBill.Copy()
+        dtR.DefaultView.RowFilter = "BillFlag='R'"
+        grdReceipt.DataSource = dtR
+        grdReceipt.DataBind()
+
+        CalPrice()
+
+        txtBillReference.Focus()
+    End Sub
+    Private Sub DeleteDeduct(seqNo As Integer)
+        Dim iRowIndex As Integer = StrNull2Zero(seqNo)
+        For i = 0 To dtBill.Rows.Count - 1
+            If (dtBill.Rows(i)("SEQUID") = iRowIndex) And (dtBill.Rows(i)("BillFlag") = "D") Then
+                dtBill.Rows(i).Delete()
+                dtBill.Rows(i).AcceptChanges()
+                Exit For
+            End If
+        Next
+
+        Dim dtR As New DataTable
+
+        dtR = dtBill.Copy()
+
+        dtR.DefaultView.RowFilter = "BillFlag='D'"
+        grdDeduct.DataSource = dtR
+        grdDeduct.DataBind()
+        CalPrice()
+        txtDeductRef.Focus()
+    End Sub
+
+    Private Sub grdDeduct_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles grdDeduct.RowCommand
+        If TypeOf e.CommandSource Is WebControls.ImageButton Then
+            Dim ButtonPressed As WebControls.ImageButton = e.CommandSource
+            Select Case ButtonPressed.ID
+                'Case "imgEdit"
+                '    EditDeduct(e.CommandArgument)
+                Case "imgDel"
+                    DeleteDeduct(e.CommandArgument)
+            End Select
+        End If
+    End Sub
+
+    'Private Sub EditDeduct(seqNo As Integer)
+    '    Dim iSeq As Integer = StrNull2Zero(seqNo)
+    '    For i = 0 To dtBill.Rows.Count - 1
+    '        If StrNull2Zero(dtBill.Rows(i)("SEQUID")) = iSeq And dtBill.Rows(i)("BillFlag").ToString() = "D" Then
+    '            With dtBill.Rows(i)
+    '                ddlAccount.SelectedValue = .Item("ACCID").ToString()
+    '                txtDeductRef.Text = .Item("BillReference").ToString()
+    '                txtDeductAmount.Text = .Item("NetPrice").ToString()
+    '            End With
+    '            hdRUID.Value = iSeq.ToString()
+    '            Exit For
+    '        End If
+    '    Next
     'End Sub
 End Class
