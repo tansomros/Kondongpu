@@ -65,54 +65,19 @@
       <HintPath>..\..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Charts.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.CodeParser.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.CodeParser.23.2.15\lib\net452\DevExpress.CodeParser.v23.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Data.Desktop.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Data.23.2.15\lib\net452\DevExpress.Data.v23.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.DataAccess.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.DataAccess.23.2.15\lib\net452\DevExpress.DataAccess.v23.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Drawing.23.2.15\lib\net452\DevExpress.Drawing.v23.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Office.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Office.Core.23.2.15\lib\net452\DevExpress.Office.v23.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Pdf.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Pdf.Core.23.2.15\lib\net452\DevExpress.Pdf.v23.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Pdf.v23.2.Drawing, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Pdf.Drawing.23.2.15\lib\net452\DevExpress.Pdf.v23.2.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.PivotGrid.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Printing.Core.23.2.15\lib\net452\DevExpress.Printing.v23.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.RichEdit.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.RichEdit.Core.23.2.15\lib\net452\DevExpress.RichEdit.v23.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.RichEdit.v23.2.Export, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.SpellChecker.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.ASPxSpellChecker.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.ASPxThemes.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.Resources.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.SpellChecker.v17.2.Core, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxSpellChecker.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Resources.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DevExpress.Web.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpo.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DevExpress.Xpo.23.2.15\lib\net452\DevExpress.Xpo.v23.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraCharts.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGauges.v23.2.Core, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v23.2.Web, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v23.2.Web.WebForms, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
       <HintPath>..\..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
       <Private>True</Private>
@@ -214,8 +179,6 @@
     <Content Include="A.aspx" />
     <Content Include="Bill.aspx" />
     <Content Include="BillDetail.aspx" />
-    <Content Include="DocumentViewer.aspx" />
-    <Content Include="LoanPay.aspx" />
     <Content Include="PriceModify.aspx" />
     <Content Include="AgreementNew.aspx" />
     <Content Include="Account.aspx" />
@@ -229,6 +192,7 @@
     <Content Include="CompanyModify.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="LoanCard.aspx" />
+    <Content Include="LoanPay.aspx" />
     <Content Include="LoanNew.aspx" />
     <Content Include="ChangePassword.aspx" />
     <Content Include="css\bodyanalytic.css" />
@@ -240,7 +204,6 @@
     <Content Include="css\sb-admin.min.css" />
     <Content Include="Download.aspx" />
     <Content Include="AgreementList.aspx" />
-    <Content Include="ReportAgreement.aspx" />
     <Content Include="ReportCompany.aspx" />
     <Content Include="ReportViewer.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -250,7 +213,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Reports\InvoiceReport.repx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Price.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -328,21 +290,6 @@
       <DependentUpon>BillDetail.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Controller\ThaiBahtFunction.vb" />
-    <Compile Include="DocumentViewer.aspx.designer.vb">
-      <DependentUpon>DocumentViewer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentViewer.aspx.vb">
-      <DependentUpon>DocumentViewer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LoanPay.aspx.designer.vb">
-      <DependentUpon>LoanPay.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LoanPay.aspx.vb">
-      <DependentUpon>LoanPay.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="PriceModify.aspx.designer.vb">
       <DependentUpon>PriceModify.aspx</DependentUpon>
     </Compile>
@@ -397,6 +344,13 @@
     </Compile>
     <Compile Include="LoanCard.aspx.vb">
       <DependentUpon>LoanCard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LoanPay.aspx.designer.vb">
+      <DependentUpon>LoanPay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoanPay.aspx.vb">
+      <DependentUpon>LoanPay.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LoanNew.aspx.designer.vb">
@@ -463,31 +417,12 @@
       <DependentUpon>AgreementList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReportAgreement.aspx.designer.vb">
-      <DependentUpon>ReportAgreement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportAgreement.aspx.vb">
-      <DependentUpon>ReportAgreement.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ReportCompany.aspx.designer.vb">
       <DependentUpon>ReportCompany.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportCompany.aspx.vb">
       <DependentUpon>ReportCompany.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\xxBillReport.Designer.vb">
-      <DependentUpon>xxBillReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\xxBillReport.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\rxBillReport.Designer.vb">
-      <DependentUpon>rxBillReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\rxBillReport.vb">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportViewer.aspx.designer.vb">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
@@ -640,12 +575,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\xxBillReport.resx">
-      <DependentUpon>xxBillReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rxBillReport.resx">
-      <DependentUpon>rxBillReport.vb</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -670,6 +599,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

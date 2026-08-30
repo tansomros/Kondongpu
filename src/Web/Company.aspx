@@ -48,7 +48,7 @@
                         <tr>
                             <td class="text-center"><% =String.Concat(row("Code")) %></td>
                             <td><a href="CompanyModify?m=c&cid=<% =String.Concat(row("UID")) %>"><% =String.Concat(row("CompanyName")) %> </a></td>
-                            <td class="text-center"><% =String.Concat(row("OwnerName")) %></td>
+                            <td class="text-left"><% =String.Concat(row("OwnerName")) %></td>
                             <td class="text-center"><% =String.Concat(row("Telephone")) %></td>
                             <td class="text-left"><% =String.Concat(row("CompanyAddress")) %> </td>
                                <td class="text-center"><% =String.Concat(row("VATID")) %></td>

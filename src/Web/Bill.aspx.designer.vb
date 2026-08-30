@@ -32,13 +32,13 @@ Partial Public Class Bill
     Protected WithEvents txtEndDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''ddlType control.
+    '''ddlCustomer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlType As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlCustomer As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''ddlCompany control.

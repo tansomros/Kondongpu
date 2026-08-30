@@ -17,8 +17,8 @@ Public Class BillController
         Return SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("Bill_Update"), ACCNO, Descriptions, CreateDate, BillNo, dr, cr, Chk, remark, bankno, CreateBy, UpdBy, LASTUPDATE, pID, payType, CostNo)
     End Function
 
-    Public Function Bill_Get() As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_Get"))
+    Public Function Bill_GetSearch(Bdate As String, Edate As String, CustomerUID As String, CompanyUID As String, Status As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Bill_GetSearch"), Bdate, Edate, CustomerUID, CompanyUID, Status)
         Return ds.Tables(0)
     End Function
     Public Function Bill_GetByUID(PUID As Integer) As DataTable

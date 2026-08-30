@@ -372,6 +372,7 @@
                                 <% Else %>
                                 <li><a href="Bill.aspx?m=list"><i class="metismenu-icon lnr-list"></i>รายการใบเสร็จ</a></li>
                                 <% End If %>
+ <% If Convert.ToInt32(Request.Cookies("ROLE_ID").Value) <= 2 Then%>
                                 <% If Request("m") = "comp" Then  %>
                                 <li><a class="mm-active" href="Company.aspx?m=comp"><i class="metismenu-icon lnr-apartment"></i>โรงงาน/บริษัท</a></li>
                                 <% Else %>
@@ -383,6 +384,50 @@
                                 <li><a href="Price.aspx?m=pc"><i class="metismenu-icon pe-7s-calculator"></i>กำหนดราคา</a></li>
                                 <% End If %>
 
+                                <% If Request("m") = "rpt2" Then  %>
+                                   <li class="mm-active">
+                                       <% Else %>
+                                   <li>
+                                       <% End If %>
+                                       <a href="#">
+                                           <i class="metismenu-icon lnr-pie-chart"></i>รายงาน
+                              <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                       </a>
+                          <ul class="mm-collapse">
+                            <% If Request("s") = "C1" Then %>
+                            <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C1"><i class="metismenu-icon fa fa-chart-area"></i>ยอดรับอ้อยแยกตามโรงงาน</a></li>
+                            <% Else %>
+                            <li><a href="ReportCompany.aspx?m=rpt2&rpt=C1"><i class="metismenu-icon fa fa-chart-area"></i>ยอดรับอ้อยแยกตามโรงงาน</a></li>
+                             <% End If %>     
+                             <% If Request("s") = "C2" Then %>
+                            <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C2"><i class="metismenu-icon fa fa-chart-area"></i>ยอดรับอ้อยแยกตามลูกค้า</a></li>
+                             <% Else %>
+                             <li><a href="ReportCompany.aspx?m=rpt2&rpt=C2"><i class="metismenu-icon fa fa-chart-area"></i>ยอดรับอ้อยแยกตามลูกค้า</a></li>
+                             <% End If %>
+                             <% If Request("s") = "C3" Then %>
+                             <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C3"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามประเภทอ้อย</a></li>
+                             <% Else %>
+                             <li><a href="ReportCompany.aspx?m=rpt2&rpt=C3"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามประเภทอ้อย</a></li>
+                             <% End If %>
+                             <% If Request("s") = "C4" Then %>
+                             <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C4"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามทะเบียนรถ</a></li>
+                             <% Else %>
+                             <li><a href="ReportCompany.aspx?m=rpt2&rpt=C4"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามทะเบียนรถ</a></li>
+                             <% End If %>
+                             <% If Request("s") = "C5" Then %>
+                             <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+                             <% Else %>
+                             <li><a href="ReportCompany.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+                             <% End If %>
+                             <% If Request("s") = "C6" Then %>
+                             <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
+                             <% Else %>
+                             <li><a href="ReportCompany.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
+                             <% End If %>
+                          </ul>
+                       </li>
+
+    <% End If %>
 
                                 <li class="app-sidebar__heading">ระบบเงินกู้</li>
 
@@ -409,13 +454,6 @@
                                 <% Else%>
                                 <li><a href="Subbook.aspx?m=sb"><i class="metismenu-icon pe-7s-ribbon"></i><span>รายการ Subbook</span></a></li>
                                 <% End If%>
-    <li class="app-sidebar__heading">REPORT</li>
-                                 <% If Request("m") = "dw" Then%>
-                                <li><a class="mm-active" href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
-                                <% Else%>
-                                <li><a href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
-                                <% End If%>
-
 
                                 <% If Request("m") = "rpt" Then  %>
                                 <li class="mm-active">
@@ -428,12 +466,16 @@
                                     </a>
                                     <ul class="mm-collapse">
                                         <% If Request("s") = "L1" Then %>
-                                        <li><a class="mm-active" href="ReportCompany.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
+                                        <li><a class="mm-active" href="ReportAgreement.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
                                         <% Else %>
-                                        <li><a href="ReportCompany.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
+                                        <li><a href="ReportAgreement.aspx?m=rpt&rpt=A1"><i class="metismenu-icon fa fa-chart-area"></i>รายงานสัญญาทั้งหมด</a></li>
                                         <% End If %>                              
                                     </ul>
                                 </li>
+
+
+
+
 
                                 <% If Convert.ToInt32(Request.Cookies("ROLE_ID").Value) <= 2 Then%>
                                 
@@ -482,7 +524,12 @@
                                 <li><a href="Users.aspx?m=u"><i class="metismenu-icon pe-7s-users"></i><span>Users</span></a></li>
                                 <% End If%>
 
-                              
+                               
+                                 <% If Request("m") = "dw" Then%>
+                                <li><a class="mm-active" href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
+                                <% Else%>
+                                <li><a href="Download.aspx?m=dw"><i class="metismenu-icon pe-7s-download"></i><span>ดาวน์โหลดแบบฟอร์ม</span></a></li>
+                                <% End If%>
                                
 
 

@@ -64,8 +64,8 @@
                     </div>
                   <div class="col-lg-6 col-md-3 col-xl-3">
                         <div class="form-group">
-                            <label>ประเภทอ้อย</label> 
-                            <asp:DropDownList ID="ddlType" runat="server" CssClass="form-control select2" AutoPostBack="True">
+                            <label>ลูกค้า</label> 
+                            <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="form-control select2" AutoPostBack="True">
                             </asp:DropDownList>
                         </div>
                     </div>

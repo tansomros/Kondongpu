@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ReportCompany.aspx.vb" Inherits="Kondongpu.ReportCompany" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ReportAgreement.aspx.vb" Inherits="Kondongpu.ReportAgreement" %>
 <%@ Import Namespace="System.Data" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -24,44 +24,28 @@
         <div class="box box-solid">
             <div class="box-body" style="background-color: #14539a; color: white">
                 <div class="row">
-                      <div class="col-lg-6 col-md-2 col-xl-2">
-      <div class="form-group">
-          <label>Start Date</label>
-          <br />
-          <div class="input-group">
-              <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control text-center"
-                  autocomplete="off" data-date-format="dd/mm/yyyy"
-                  data-date-language="th-th" data-provide="datepicker"
-                  onkeyup="chkstr(this,this.value)"></asp:TextBox>
-              <div class="input-group-append">
-                  <span class="input-group-text"><i class="fa lnr-calendar-full"></i></span>
-              </div>
-          </div>
-      </div>
-
-  </div>
-  <div class="col-lg-6 col-md-2 col-xl-2">
-      <div class="form-group">
-          <label>End Date</label>
-          <br />
-          <div class="input-group">
-              <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control text-center"
-                  autocomplete="off" data-date-format="dd/mm/yyyy"
-                  data-date-language="th-th" data-provide="datepicker"
-                  onkeyup="chkstr(this,this.value)"></asp:TextBox>
-              <div class="input-group-append">
-                  <span class="input-group-text"><i class="fa lnr-calendar-full"></i></span>
-              </div>
-          </div>
-      </div>
-  </div>
-                                        <div class="col-lg-6 col-md-3 col-xl-3">
-    <div class="form-group">
-        <label>โรงงาน</label> 
-        <asp:DropDownList ID="ddlCompany" runat="server" CssClass="form-control select2" AutoPostBack="True">
-        </asp:DropDownList>
-    </div>
-</div>
+                        <div class="col-lg-6 col-md-4 col-xl-3">
+                        <div class="form-group">
+                            <label>ประเภท</label>
+                            <br />
+                            <asp:DropDownList ID="ddlType" runat="server" CssClass="form-control select2" Width="100%" AutoPostBack="True">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-xl-3">
+                        <div class="form-group">
+                            <label>สถานะ</label>
+                            <br />
+                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control select2" Width="100%" AutoPostBack="True">
+                            </asp:DropDownList>
+                        </div>
+                    </div> 
+                    <div class="col-lg-6 col-md-4 col-xl-3">
+                        <div class="form-group">
+                            <label>คำค้นหา</label><br />
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" PlaceHolder="ชื่อลูกค้า / เลขที่สัญญา"></asp:TextBox>
+                        </div>
+                    </div>
                     
                      <div class="col-lg-6 col-md-12 col-xl-3">
                         <br />
@@ -99,7 +83,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% For Each row As DataRow In dtRptC1.Rows %>
+                            <% For Each row As DataRow In dtRptA.Rows %>
                             <tr>
                                 <td class="text-center"><% =String.Concat(row("Code")) %></td>
                                 <td class="text-center"><% =Format(row("AgreementDate"), "dd/MM/yyyy") %></td>

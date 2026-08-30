@@ -1,12 +1,5 @@
 ﻿Imports System.Drawing
 Imports System.IO
-Imports System.Net
-Imports System.Net.Mail
-Imports DevExpress.XtraPrinting.Export.Pdf
-Imports System.Security.Cryptography
-Imports DevExpress.XtraRichEdit.Layout
-Imports Org.BouncyCastle.Asn1.Ocsp
-Imports Org.BouncyCastle.Ocsp
 
 Public Class LoanPay
     Inherits System.Web.UI.Page

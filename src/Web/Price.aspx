@@ -138,7 +138,7 @@
                                 <td><% =String.Concat(row("CaneName")) %></td>
                                 <td class="text-center"><% =String.Concat(row("StartDTT")) %></td>
                                 <td class="text-center"><% =String.Concat(row("EndDTT")) %></td>
-                                <td class="text-center"><% =String.Concat(row("UnitPrice")) %></td>
+                                <td class="text-center"><% =Kondongpu.DBNull2Dbl(row("UnitPrice")).ToString("#,###.##") %></td>
                                 <td class="text-center">
                                      <% If String.Concat(row("StatusFlag")) = "A" Then%>
    <asp:Image ID="imgStatus" runat="server" ImageUrl="images/icon-ok.png" />

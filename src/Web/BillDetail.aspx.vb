@@ -97,7 +97,7 @@ Public Class BillDetail
             With dt.Rows(0)
                 hdBillUID.Value = .Item("UID")
                 lblBillNumber.Text = .Item("BillNumber")
-                txtBillDate.Text = .Item("BillDate")
+                txtBillDate.Text = DisplayShortDateTH(.Item("BillDate"))
                 ddlCustomer.SelectedValue = .Item("CustomerUID")
                 'txtCustomerName.Text = .Item("CustomerName") + "(" + .Item("NickName") + ")"
                 'txtCustomerAddress.Text = .Item("CustomerAddress")
@@ -358,18 +358,22 @@ Public Class BillDetail
     End Sub
 
     Protected Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
-        ReportTitle = "ใบเสร็จรับเงิน"
-        FagRPT = "BillingReport"
-        ReportName = "BillingReport.rpt"
-        ReportFormula = "{View_BillingDetail.BillNumber} = '" & lblBillNumber.Text & "'"
+
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('DocumentViewer.aspx?r=bill&id=" & lblBillNumber.Text & "&RPTTYPE=PDF','_blank');", True)
 
 
-        'ReportOneParameter = txtBillNumber.Text.Trim()
-        'fRptView.FileName = BaseClass.ReportPath & ReportName
-        'fRptView.SelectionFomula = ReportFormula
+        'ReportTitle = "ใบเสร็จรับเงิน"
+        'FagRPT = "BillingReport"
+        'ReportName = "BillingReport.rpt"
+        'ReportFormula = "{View_BillingDetail.BillNumber} = '" & lblBillNumber.Text & "'"
 
 
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('ReportViewer.aspx?rpt=rev&id=" & hdBillUID.Value & "&code=" & lblBillNumber.Text & "&RPTTYPE=PDF','_blank');", True)
+        ''ReportOneParameter = txtBillNumber.Text.Trim()
+        ''fRptView.FileName = BaseClass.ReportPath & ReportName
+        ''fRptView.SelectionFomula = ReportFormula
+
+
+        'ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('ReportViewer.aspx?rpt=rev&id=" & hdBillUID.Value & "&code=" & lblBillNumber.Text & "&RPTTYPE=PDF','_blank');", True)
     End Sub
 
     Protected Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master"  CodeBehind="UserInfo.aspx.vb" Inherits="Kondongpu.UserInfo" %>
-    <%@ Register assembly="DevExpress.Web.v23.2, Version=23.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    <%@ Register assembly="DevExpress.Web.v17.2, Version=17.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     namespace="DevExpress.Web" tagprefix="dx" %>
         <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
             <link href="css/DragAndDrop.css" rel="stylesheet" type="text/css" />

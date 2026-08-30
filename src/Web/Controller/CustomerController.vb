@@ -8,6 +8,10 @@ Public Class CustomerController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Customer_GetAll"))
         Return ds.Tables(0)
     End Function
+    Public Function Customer_GetForSearch() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Customer_GetForSearch"))
+        Return ds.Tables(0)
+    End Function
 
     Public Function Customer_SearchByCardID(ByVal CardID As String) As Boolean
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("Customer_SearchByCardID"), CardID)
