@@ -41,6 +41,15 @@ Partial Public Class ReportCompany
     Protected WithEvents txtEndDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''lblComp control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblComp As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''ddlCompany control.
     '''</summary>
     '''<remarks>
@@ -75,13 +84,4 @@ Partial Public Class ReportCompany
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-
-    '''<summary>
-    '''pnData control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnData As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

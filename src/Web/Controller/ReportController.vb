@@ -185,5 +185,14 @@ Public Class ReportController
     End Function
 
 #End Region
-
+#Region "Bill"
+    Public Function RPT_BillByCompany(StartDate As String, EndDate As String, CompanyUID As Integer) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillByCompany"), StartDate, EndDate, CompanyUID)
+        Return ds.Tables(0)
+    End Function
+    Public Function RPT_BillByCustomer(StartDate As String, EndDate As String, CustomerUID As Integer) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillByCustomer"), StartDate, EndDate, CustomerUID)
+        Return ds.Tables(0)
+    End Function
+#End Region
 End Class
