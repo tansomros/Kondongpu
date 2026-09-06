@@ -209,7 +209,6 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="A.aspx" />
     <Content Include="Bill.aspx" />
     <Content Include="BillDetail.aspx" />
     <Content Include="DocumentViewer.aspx" />
@@ -239,6 +238,7 @@
     <Content Include="Download.aspx" />
     <Content Include="AgreementList.aspx" />
     <Content Include="ReportAgreement.aspx" />
+    <Content Include="ReportCondition.aspx" />
     <Content Include="ReportCompany.aspx" />
     <Content Include="ReportViewer.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -305,13 +305,6 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="A.aspx.designer.vb">
-      <DependentUpon>A.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="A.aspx.vb">
-      <DependentUpon>A.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Bill.aspx.designer.vb">
       <DependentUpon>Bill.aspx</DependentUpon>
     </Compile>
@@ -466,6 +459,13 @@
     </Compile>
     <Compile Include="ReportAgreement.aspx.vb">
       <DependentUpon>ReportAgreement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportCondition.aspx.designer.vb">
+      <DependentUpon>ReportCondition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportCondition.aspx.vb">
+      <DependentUpon>ReportCondition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReportCompany.aspx.designer.vb">

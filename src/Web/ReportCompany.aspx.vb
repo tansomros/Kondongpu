@@ -6,7 +6,7 @@ Public Class ReportCompany
     Public dtRptC As New DataTable
     Dim ctlA As New AgreementController
     Dim ctlR As New ReportController
-
+    Dim ctlM As New MasterController
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If IsNothing(Request.Cookies("KDP")) Then
             Response.Redirect("Default.aspx")
@@ -25,8 +25,13 @@ Public Class ReportCompany
                     LoadCustomer()
                 Case "C3"
                     lblReportTitle.Text = "น้ำหนักตามประเภทอ้อย"
+                    lblComp.Text = "ประเภทอ้อย"
+                    LoadCaneType()
                 Case "C4"
                     lblReportTitle.Text = "น้ำหนักตามทะเบียนรถ"
+                    'pnComp.Visible = False
+                    lblComp.Text = "ทะเบียนรถ"
+                    LoadCarToDDL()
                 Case "C5"
                     lblReportTitle.Text = "สรุปรายการหัก"
                 Case "C6"
@@ -51,6 +56,25 @@ Public Class ReportCompany
         ddlCompany.DataValueField = "UID"
         ddlCompany.DataBind()
     End Sub
+    Private Sub LoadCaneType()
+        ddlCompany.DataSource = ctlM.CaneType_GetForSelection
+        ddlCompany.DataTextField = "CaneName"
+        ddlCompany.DataValueField = "UID"
+        ddlCompany.DataBind()
+    End Sub
+    Private Sub LoadCarToDDL()
+        Dim ctlC As New CustomerController
+        Dim dtCar As New DataTable
+        dtCar = ctlC.CarRegistration_Get
+        If dtCar.Rows.Count > 0 Then
+            With ddlCompany
+                .DataSource = dtCar
+                .DataTextField = "RegisNumber"
+                .DataValueField = "RegisNumber"
+                .DataBind()
+            End With
+        End If
+    End Sub
 
     Private Sub LoadData()
         If txtStartDate.Text = "" Then
@@ -73,12 +97,16 @@ Public Class ReportCompany
                 dtRptC = ctlR.RPT_BillByCustomer(Bdate, Edate, StrNull2Zero(ddlCompany.SelectedValue))
             Case "C3"
                 lblReportTitle.Text = "น้ำหนักตามประเภทอ้อย"
+                dtRptC = ctlR.RPT_BillByCane(Bdate, Edate, StrNull2Zero(ddlCompany.SelectedValue))
             Case "C4"
                 lblReportTitle.Text = "น้ำหนักตามทะเบียนรถ"
+                dtRptC = ctlR.RPT_BillByCar(Bdate, Edate, ddlCompany.SelectedValue)
             Case "C5"
                 lblReportTitle.Text = "สรุปรายการหัก"
+                pnComp.Visible = False
             Case "C6"
                 lblReportTitle.Text = "สรุปการจ่ายประจำวัน"
+                pnComp.Visible = False
         End Select
 
 

@@ -159,7 +159,7 @@ Public Class BillDetail
     End Sub
     Private Sub LoadCarToDDL()
         Dim dtCar As New DataTable
-        dtCar = ctlC.CarRegistration_Get(ddlCustomer.SelectedValue)
+        dtCar = ctlC.CarRegistration_GetByCustomer(ddlCustomer.SelectedValue)
         If dtCar.Rows.Count > 0 Then
             With ddlCar
                 .DataSource = dtCar

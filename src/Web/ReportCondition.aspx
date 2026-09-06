@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ReportCompany.aspx.vb" Inherits="Kondongpu.ReportCompany" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ReportCondition.aspx.vb" Inherits="Kondongpu.ReportCondition" %>
 <%@ Import Namespace="System.Data" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -51,14 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="pnComp" runat="server" class="col-lg-6 col-md-3 col-xl-3">
-                        <div class="form-group">
-                            <label><asp:Label ID="lblComp" runat="server" Text="โรงงาน"></asp:Label></label>
-                            <asp:DropDownList ID="ddlCompany" runat="server" CssClass="form-control select2" AutoPostBack="True">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
+                    </div>                 
 
                     <div class="col-lg-6 col-md-12 col-xl-3">
                         <br />
@@ -85,47 +78,37 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">วันที่</th>
-                                    <th class="text-center">เลขที่บิล</th>
-                                    <th class="text-center">
-                                         <% If Request("rpt") = "C1" Or Request("rpt") = "C2" Then %>
-                                        ทะเบียนรถ
-                                           <%  Else %>
-                                        ชื่อลูกค้า
-                                           <% End If %>
-                                    </th>
-                                    <th class="text-center">เกรดอ้อย</th>
-                                    <th class="text-center">ราคา</th>
-                                    <th class="text-center">นน.สุทธิ</th>
-                                    <th class="text-center">จำนวนเงิน</th>
-                                    <th class="text-center">ค่าน้ำมัน</th>
-                                    <th class="text-center">เป็นเงินสุทธิ</th>
-                                      <% If Request("rpt") = "C4" Then %>
-                                    <th class="text-center">โรงงาน</th>
-                                       <% End If %>
+   <% If Request("rpt") = "C6" Then %>
+                                    <th class="text-center">เลขที่บิล</th>                          
+                                    <th class="text-left"> ชื่อลูกค้า</th>                          
+                                    <th class="text-center">ชื่อเล่น</th>
+                                    <th class="text-left">รายการ</th>    
+                                    <th class="text-right">จำนวนเงิน</th>
+                    <% Else %>                               
+                                    <th class="text-right">รวม</th>
+                                    <th class="text-right">รวมหัก</th>
+                                    <th class="text-right">จำนวนจ่ายรวม</th>
+       <% End If %>    
+                                 
                                 </tr>
                             </thead>
                             <tbody>
-                                <% For Each row As DataRow In dtRptC.Rows %>
+                                <% For Each row As DataRow In dtRptB.Rows %>
                                 <tr>
                                     <td class="text-center"><% =String.Concat(row("nRow")) %></td>
-                                    <td class="text-center"><% =Format(row("SendDate"), "dd/MM/yyyy") %></td>
-                                    <td class="text-center"><% =String.Concat(row("BillNumber")) %></td>
-                                    <td class="text-left">
-                                         <% If Request("rpt") = "C1" Or Request("rpt") = "C2" Then %>
-                                               <%  =String.Concat(row("CarRegisNumber")) %>
-                                         <% Else %>
-                                               <%  =String.Concat(row("CustomerName")) %>
-                                         <% End If %>
-                                    </td>
-                                    <td class="text-center"><% =String.Concat(row("CaneTypeUID")) %></td>
-                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("UnitPrice")).ToString("#,##0.##") %></td>
-                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("Weight")).ToString("#,##0.##") %></td>
-                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("NetPrice")).ToString("#,##0.##") %></td>
-                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("GasPrice")).ToString("#,##0.##") %></td>
-                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("NetBalance")).ToString("#,##0.##") %></td>
-                                      <% If Request("rpt") = "C4" Then %>
-                                    <td class="text-center"><% =String.Concat(row("CompanyName")) %></td>
-                                       <% End If %>
+                                    <td class="text-center"><% =Format(row("BillDate"), "dd/MM/yyyy") %></td>
+   <% If Request("rpt") = "C6" Then %>
+                                    <td class="text-center"><% =String.Concat(row("BillNumber")) %></td>    
+                                       <td class="text-left"><% =String.Concat(row("CustomerName")) %></td>   
+                                       <td class="text-center"><% =String.Concat(row("NickName")) %></td>   
+                                       <td class="text-left"><% =String.Concat(row("AccountName")) %></td>   
+                                    <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("NetPrice")).ToString("#,##0.##") %></td>                            
+                                         
+                           <% Else %> 
+                                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("SumPrice")).ToString("#,##0.##") %></td>
+                                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("SumDeduct")).ToString("#,##0.##") %></td>
+                                                <td class="text-right"><% =Kondongpu.DBNull2Dbl(row("NetBalance")).ToString("#,##0.##") %></td>
+                                         <% End If %>    
                                 </tr>
                                 <%  Next %>
                             </tbody>
@@ -134,8 +117,7 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="cmdView" EventName="Click" />
-                <asp:AsyncPostBackTrigger ControlID="ddlCompany" EventName="SelectedIndexChanged" />
+                <asp:AsyncPostBackTrigger ControlID="cmdView" EventName="Click" /> 
             </Triggers>
         </asp:UpdatePanel>
 

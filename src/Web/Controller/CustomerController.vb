@@ -145,12 +145,12 @@ Public Class CustomerController
 #End Region
 
 #Region "Customer Car RegisNumber"
-    Public Function CarRegistration_Get(ByVal CusID As String) As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_Get"), CusID)
+    Public Function CarRegistration_Get() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_Get"))
         Return ds.Tables(0)
     End Function
-    Public Function CarRegistration_GetByCustomerUID(ByVal CusUID As Integer) As DataTable
-        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_GetByCustomerUID"), CusUID)
+    Public Function CarRegistration_GetByCustomer(ByVal CusUID As Integer) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_GetByCustomer"), CusUID)
         Return ds.Tables(0)
     End Function
     Function CarRegistration_CheckDuplicate(ByVal CarRegis As String) As Boolean

@@ -194,5 +194,21 @@ Public Class ReportController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillByCustomer"), StartDate, EndDate, CustomerUID)
         Return ds.Tables(0)
     End Function
+    Public Function RPT_BillByCane(StartDate As String, EndDate As String, CaneUID As Integer) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillByCane"), StartDate, EndDate, CaneUID)
+        Return ds.Tables(0)
+    End Function
+    Public Function RPT_BillByCar(StartDate As String, EndDate As String, CarNumber As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillByCar"), StartDate, EndDate, CarNumber)
+        Return ds.Tables(0)
+    End Function
+    Public Function RPT_BillSummary(StartDate As String, EndDate As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillSummary"), StartDate, EndDate)
+        Return ds.Tables(0)
+    End Function
+    Public Function RPT_BillDeduct(StartDate As String, EndDate As String) As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("RPT_BillDeduct"), StartDate, EndDate)
+        Return ds.Tables(0)
+    End Function
 #End Region
 End Class

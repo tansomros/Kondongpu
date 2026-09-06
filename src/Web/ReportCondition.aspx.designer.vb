@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ReportCompany
+Partial Public Class ReportCondition
 
     '''<summary>
     '''lblReportTitle control.
@@ -39,33 +39,6 @@ Partial Public Class ReportCompany
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEndDate As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''pnComp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnComp As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''lblComp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblComp As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlCompany control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlCompany As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''cmdView control.

@@ -325,7 +325,7 @@ Public Class CustomerModify
 
     Private Sub LoadCar()
         Dim dtP As New DataTable
-        dtP = ctlCus.CarRegistration_Get(txtCustomerID.Text)
+        dtP = ctlCus.CarRegistration_GetByCustomer(txtCustomerID.Text)
         If dtP.Rows.Count > 0 Then
             With grdCar
                 .Visible = True
