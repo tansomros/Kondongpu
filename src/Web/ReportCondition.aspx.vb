@@ -16,9 +16,9 @@ Public Class ReportCondition
             txtEndDate.Text = Today.Date.ToString("dd/MM/") & (Today.Year + 543)
             Select Case Request("rpt")
                 Case "C5"
-                    lblReportTitle.Text = "สรุปรายการหัก"
-                Case "C6"
                     lblReportTitle.Text = "สรุปการจ่ายประจำวัน"
+                Case "C6"
+                    lblReportTitle.Text = "สรุปการหัก"
             End Select
 
         End If
@@ -39,10 +39,10 @@ Public Class ReportCondition
 
         Select Case Request("rpt")
             Case "C5"
-                lblReportTitle.Text = "สรุปรายการหัก"
+                lblReportTitle.Text = "สรุปการจ่ายประจำวัน"
                 dtRptB = ctlR.RPT_BillSummary(Bdate, Edate)
             Case "C6"
-                lblReportTitle.Text = "สรุปการจ่ายประจำวัน"
+                lblReportTitle.Text = "สรุปรายการหัก"
                 dtRptB = ctlR.RPT_BillDeduct(Bdate, Edate)
         End Select
 
@@ -53,7 +53,10 @@ Public Class ReportCondition
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        'ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('DocumentViewer.aspx?r=c1&b=" & txtStartDate.Text & "&e=" & txtEndDate.Text & "&c=" & ddlCompany.SelectedValue & "&RPTTYPE=PDF','_blank');", True)
+        Dim Bdate, Edate As String
+        Bdate = ConvertStrDate2DBDate(txtStartDate.Text)
+        Edate = ConvertStrDate2DBDate(txtEndDate.Text)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('DocumentViewer.aspx?r=" & Request("rpt").ToLower() & "&b=" & Bdate & "&e=" & Edate & "&RPTTYPE=PDF','_blank');", True)
     End Sub
 End Class
 

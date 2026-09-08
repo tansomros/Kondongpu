@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -475,6 +475,42 @@
       <DependentUpon>ReportCompany.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Reports\rxBillCar.Designer.vb">
+      <DependentUpon>rxBillCar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillCar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rxBillCompany.Designer.vb">
+      <DependentUpon>rxBillCompany.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillCompany.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rxBillCustomer.Designer.vb">
+      <DependentUpon>rxBillCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillCustomer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rxBillCane.Designer.vb">
+      <DependentUpon>rxBillCane.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillCane.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rxBillDeduct.Designer.vb">
+      <DependentUpon>rxBillDeduct.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillDeduct.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rxBillSummary.Designer.vb">
+      <DependentUpon>rxBillSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rxBillSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\xxBillReport.Designer.vb">
       <DependentUpon>xxBillReport.vb</DependentUpon>
     </Compile>
@@ -637,6 +673,24 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillCar.resx">
+      <DependentUpon>rxBillCar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillCompany.resx">
+      <DependentUpon>rxBillCompany.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillCustomer.resx">
+      <DependentUpon>rxBillCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillCane.resx">
+      <DependentUpon>rxBillCane.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillDeduct.resx">
+      <DependentUpon>rxBillDeduct.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rxBillSummary.resx">
+      <DependentUpon>rxBillSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\xxBillReport.resx">
       <DependentUpon>xxBillReport.vb</DependentUpon>

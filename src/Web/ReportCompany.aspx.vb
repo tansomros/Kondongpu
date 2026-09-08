@@ -65,11 +65,11 @@ Public Class ReportCompany
     Private Sub LoadCarToDDL()
         Dim ctlC As New CustomerController
         Dim dtCar As New DataTable
-        dtCar = ctlC.CarRegistration_Get
+        dtCar = ctlC.CarRegistration_GetForSelection
         If dtCar.Rows.Count > 0 Then
             With ddlCompany
                 .DataSource = dtCar
-                .DataTextField = "RegisNumber"
+                .DataTextField = "CarRegisNumber"
                 .DataValueField = "RegisNumber"
                 .DataBind()
             End With
@@ -116,7 +116,10 @@ Public Class ReportCompany
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('DocumentViewer.aspx?r=c1&b=" & txtStartDate.Text & "&e=" & txtEndDate.Text & "&c=" & ddlCompany.SelectedValue & "&RPTTYPE=PDF','_blank');", True)
+        Dim Bdate, Edate As String
+        Bdate = ConvertStrDate2DBDate(txtStartDate.Text)
+        Edate = ConvertStrDate2DBDate(txtEndDate.Text)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "Report", "window.open('DocumentViewer.aspx?r=" & Request("rpt").ToLower() & "&b=" & Bdate & "&e=" & Edate & "&c=" & ddlCompany.SelectedValue & "&RPTTYPE=PDF','_blank');", True)
     End Sub
 
     Private Sub ddlCompany_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlCompany.SelectedIndexChanged

@@ -413,17 +413,17 @@
                              <li><a class="mm-active" href="ReportCompany.aspx?m=rpt2&rpt=C4"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามทะเบียนรถ</a></li>
                              <% Else %>
                              <li><a href="ReportCompany.aspx?m=rpt2&rpt=C4"><i class="metismenu-icon fa fa-chart-area"></i>น้ำหนักตามทะเบียนรถ</a></li>
-                             <% End If %>
+                             <% End If %>        
                              <% If Request("rpt") = "C5" Then %>
-                             <li><a class="mm-active" href="ReportCondition.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+                             <li><a class="mm-active" href="ReportCondition.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
                              <% Else %>
-                             <li><a href="ReportCondition.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+                             <li><a href="ReportCondition.aspx?m=rpt2&rpt=C5"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
                              <% End If %>
                              <% If Request("rpt") = "C6" Then %>
-                             <li><a class="mm-active" href="ReportCondition.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
-                             <% Else %>
-                             <li><a href="ReportCondition.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปการจ่ายประจำวัน</a></li>
-                             <% End If %>
+  <li><a class="mm-active" href="ReportCondition.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+  <% Else %>
+  <li><a href="ReportCondition.aspx?m=rpt2&rpt=C6"><i class="metismenu-icon fa fa-chart-area"></i>สรุปรายการหัก</a></li>
+  <% End If %>
                           </ul>
                        </li>
 

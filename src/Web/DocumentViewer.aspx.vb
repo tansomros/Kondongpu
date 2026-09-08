@@ -13,19 +13,6 @@ Public Class DocumentViewer
         Dim ctlR As New ReportController
 
         Select Case reportKey
-            'Case "asm"
-            '    report = New rxAssessment()
-            '    If Not Request("emp") Is Nothing Then
-            '        ctlR.Tmp_Employee_Set2PrintById(Request("emp"), Request.Cookies("Username").Value)
-            '    End If
-
-            '    Dim dt As DataTable = ctlR.RPT_EmployeePrintAssessment(StrNull2Zero(Request("y")), Request.Cookies("username").Value)
-            '    report.DataSource = dt
-            '    report.DataMember = dt.TableName
-
-            '    ' 2. ส่งค่าให้ Parameter (ชื่อต้องตรงกับที่ตั้งไว้ใน Designer)
-            '    report.Parameters("AsmYear").Value = StrNull2Zero(Request("y"))
-            '    report.Parameters("Username").Value = Request.Cookies("username").Value
             Case "bill"
                 report = New rxBillReport()
 
@@ -39,6 +26,137 @@ Public Class DocumentViewer
                         If param.Name = "@BillNumber" Then
                             param.Type = GetType(String)
                             param.Value = Request("id")
+                        End If
+                    Next
+                Next
+            Case "c1"
+                report = New rxBillCompany()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+                report.Parameters("CompanyUID").Value = Request("c")
+
+                ' ผูกค่า @EmployeeID ของทุก StoredProc ให้ใช้ค่าจาก Report Parameter
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillCompany).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
+                        ElseIf param.Name = "@CompanyUID" Then
+                            param.Type = GetType(Integer)
+                            param.Value = Request("c")
+                        End If
+                    Next
+                Next
+            Case "c2"
+                report = New rxBillCustomer()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+                report.Parameters("CustomerUID").Value = Request("c")
+
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillCustomer).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
+                        ElseIf param.Name = "@CustomerUID" Then
+                            param.Type = GetType(Integer)
+                            param.Value = Request("c")
+                        End If
+                    Next
+                Next
+            Case "c3"
+                report = New rxBillCane()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+                report.Parameters("CaneUID").Value = Request("c")
+
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillCane).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
+                        ElseIf param.Name = "@CaneUID" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("c")
+                        End If
+                    Next
+                Next
+            Case "c4"
+                report = New rxBillCar()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+                report.Parameters("CarRegisNumber").Value = Request("c")
+
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillCar).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
+                        ElseIf param.Name = "@CarRegisNumber" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("c")
+                        End If
+                    Next
+                Next
+            Case "c5"
+                report = New rxBillSummary()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillSummary).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
+                        End If
+                    Next
+                Next
+            Case "c6"
+                report = New rxBillDeduct()
+
+                ' กำหนดค่า Parameter ให้รายงาน
+                report.Parameters("StartDate").Value = Request("b")
+                report.Parameters("EndDate").Value = Request("e")
+
+                Dim ds As DevExpress.DataAccess.Sql.SqlDataSource = DirectCast(report, rxBillDeduct).SqlDataSource1
+                For Each query As DevExpress.DataAccess.Sql.SqlQuery In ds.Queries
+                    For Each param As DevExpress.DataAccess.Sql.QueryParameter In query.Parameters
+                        If param.Name = "@StartDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("b")
+                        ElseIf param.Name = "@EndDate" Then
+                            param.Type = GetType(String)
+                            param.Value = Request("e")
                         End If
                     Next
                 Next

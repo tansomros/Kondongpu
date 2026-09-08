@@ -379,7 +379,7 @@ Partial Public Class xxBillReport
         '
         'SqlDataSource1
         '
-        Me.SqlDataSource1.ConnectionName = "SUTHPA_Connection"
+        Me.SqlDataSource1.ConnectionName = "KondongpuConnection"
         Me.SqlDataSource1.Name = "SqlDataSource1"
         StoredProcQuery1.Name = "Employee"
         QueryParameter1.Name = "@EmployeeID"

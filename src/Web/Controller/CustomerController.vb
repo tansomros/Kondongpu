@@ -149,6 +149,10 @@ Public Class CustomerController
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_Get"))
         Return ds.Tables(0)
     End Function
+    Public Function CarRegistration_GetForSelection() As DataTable
+        ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_GetForSelection"))
+        Return ds.Tables(0)
+    End Function
     Public Function CarRegistration_GetByCustomer(ByVal CusUID As Integer) As DataTable
         ds = SqlHelper.ExecuteDataset(ConnectionString, GetFullyQualifiedName("CarRegistration_GetByCustomer"), CusUID)
         Return ds.Tables(0)
